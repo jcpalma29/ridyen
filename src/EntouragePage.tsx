@@ -250,7 +250,7 @@ export default function EntouragePage() {
               <div>
                 <div className="entourage-section__title">GROOMSMEN</div>
                 <ul className="entourage-list" aria-label="Groomsmen">
-                  <li>POCHOL IAN TRIGO</li>
+                  <li>POCHOLO IAN TRIGO</li>
                   <li>ARK</li>
                   <li>ROI</li>
                   <li>LESTER</li>

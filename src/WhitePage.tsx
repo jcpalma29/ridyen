@@ -142,7 +142,7 @@ export default function WhitePage() {
         </div>
 
         <div className='whitePage__text'>
-          <p ref={line1Ref} className='whitePage__line'>Together with their familes,</p>
+          <p ref={line1Ref} className='whitePage__line'>Together with their families,</p>
 
           <img ref={rnyRef} className='whitePage__rny' src={`${base}rny2.png`} alt='Rid and Yen' draggable={false} />
 
