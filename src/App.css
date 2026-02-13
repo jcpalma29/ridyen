@@ -10,7 +10,6 @@ body,
   min-height: 95vh;
 }
 
-/* Intro wrapper: now uses introback.png instead of a solid color */
 .bgVideo {
   position: fixed;
   inset: 0;
@@ -23,21 +22,19 @@ body,
   background-position: center;
   background-size: cover;
 
-  /* tiny safety fallback if image is still loading */
   background-color: #000;
 }
 
-/* Video stays on top, background image shows behind it if any tiny gaps happen */
 .bgVideo__video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover !important;
+  z-index: 1;
+  object-fit: cover;
   object-position: center;
 }
 
-/* iOS/Safari: dynamic viewport height so it truly covers even with browser bars */
 @supports (height: 100dvh) {
   .bgVideo {
     height: 100dvh;

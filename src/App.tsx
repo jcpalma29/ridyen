@@ -17,7 +17,6 @@ export default function App() {
   const introVideoRef = useRef<HTMLVideoElement | null>(null)
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
-  const [videoReady, setVideoReady] = useState(false)
   const [introEnded, setIntroEnded] = useState(false)
   const [showPages, setShowPages] = useState(false)
 
@@ -27,9 +26,11 @@ export default function App() {
     window.matchMedia('(max-width: 767px)').matches
 
   const introVideoSrc = isMobile ? '/rymob.mp4' : '/ryecrop.mp4'
+  const introPosterSrc = isMobile ? '/intropostermob.png' : '/introposter.png'
 
   useEffect(() => {
     if (showPages) return
+
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
 
@@ -38,6 +39,13 @@ export default function App() {
       document.body.style.overflow = ''
     }
   }, [showPages])
+
+  // ensure the browser reloads the correct video when switching mobile/desktop
+  useEffect(() => {
+    const v = introVideoRef.current
+    if (!v) return
+    v.load()
+  }, [introVideoSrc])
 
   useEffect(() => {
     if (!introEnded) return
@@ -132,8 +140,8 @@ export default function App() {
           preload='metadata'
           playsInline
           muted
+          poster={introPosterSrc}
           onCanPlay={() => {
-            setVideoReady(true)
             if (introVideoRef.current) introVideoRef.current.playbackRate = 1.4
           }}
           onPlay={() => {
@@ -150,7 +158,7 @@ export default function App() {
         </video>
 
         {!isVideoPlaying && !introEnded && (
-          <div className='bgVideo__tip' aria-hidden={!videoReady}>
+          <div className='bgVideo__tip'>
             click to open
           </div>
         )}
