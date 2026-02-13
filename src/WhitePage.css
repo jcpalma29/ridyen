@@ -1,0 +1,177 @@
+.whitePage{
+  min-height: 100vh;
+  background: #eeeeec;
+  position: relative;
+  overflow: hidden;
+  opacity: 1;
+
+  /* wedding default */
+  font-family: var(--font-serif);
+}
+
+.whitePage__content{
+  min-height: 100vh;
+  position: relative;
+  background: transparent;
+  z-index: 2;
+}
+
+/* top center container (smaller, responsive) */
+.whitePage__stack{
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(260px, 62vw, 360px);
+  z-index: 3;
+
+  /* predictable layering */
+  isolation: isolate;
+}
+
+/* reserve height so stacked absolute images have space */
+.whitePage__stack::before{
+  content: "";
+  display: block;
+  padding-top: 140%;
+}
+
+/* ivy is tied to the stack (moves with scroll naturally), but stays still (no float transform) */
+.whitePage__ivy{
+  position: absolute;
+  left: 50%;
+  bottom: -210px;
+  transform: translateX(-50%);
+  width: clamp(420px, 165vw, 820px);
+  height: auto;
+
+  opacity: 0.72 !important;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+
+  /* always behind */
+  z-index: 0;
+
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
+}
+
+/* ONLY this wrapper floats */
+.whitePage__float{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  will-change: transform;
+}
+
+/* stacked images */
+.whitePage__img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.whitePage__img--first{
+  z-index: 1;
+}
+
+.whitePage__img--top{
+  z-index: 2;
+}
+
+/* text container below the image stack */
+.whitePage__text{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(520px, calc(100vw - 56px));
+  text-align: center;
+  top: calc(22px + 490px);
+  z-index: 4;
+}
+
+.whitePage__line{
+  margin: 0;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(20, 20, 18, 0.78);
+  font-family: var(--font-serif);
+}
+
+/* rny image (smaller, responsive) */
+.whitePage__rny{
+  display: block;
+  width: clamp(120px, 30vw, 190px);
+  height: auto;
+  margin: 10px auto 10px auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* DATE WRAPPER */
+.whitePage__dateRow{
+  position: relative;
+  width: min(520px, calc(100vw - 56px));
+  margin: 16px auto 0 auto;
+  text-align: center;
+  color: #5a6a47;
+  font-family: var(--font-serif);
+  text-transform: uppercase;
+  z-index: 5;
+}
+
+/* ABRIL | 22 | 2026 */
+.whitePage__dateTopRow3{
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: clamp(12px, 2.6vw, 22px);
+  width: 100%;
+  margin: 18px 0 8px 0;
+  letter-spacing: 0.28em;
+}
+
+.whitePage__side{
+  font-size: clamp(12px, 2.2vw, 18px);
+  opacity: 0.92;
+  white-space: nowrap;
+}
+
+.whitePage__sep3{
+  opacity: 0.55;
+  font-size: clamp(12px, 2.2vw, 18px);
+  transform: translateY(-1px);
+}
+
+.whitePage__day3{
+  font-size: clamp(20px, 3.6vw, 34px);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* no extra whitespace */
+.whitePage__after{
+  height: 0;
+}
+
+@media (max-width: 520px){
+  .whitePage__text{
+    top: calc(22px + 410px);
+  }
+
+  .whitePage__line{
+    font-size: 16px;
+  }
+
+  .whitePage__ivy{
+    width: 170vw;
+    bottom: -220px;
+  }
+}

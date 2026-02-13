@@ -1,0 +1,291 @@
+.entourage-page {
+  min-height: 100vh;
+  background: #a3ad92 !important;
+  position: relative;
+
+  overflow-x: hidden;
+  overflow-y: visible;
+
+  font-family: var(--font-serif);
+  display: flex;
+  justify-content: center;
+}
+
+.entourage-page__frame {
+  width: min(1200px, 100% - 20vw);
+  min-height: 100vh;
+  background: #ffffff;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  position: relative;
+  overflow: visible;
+}
+
+.entourage-page__inner {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 80px);
+  background: #ffffff;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 62px 22px 70px;
+  color: rgba(20, 20, 18, 0.78);
+}
+
+.entourage-page__inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 900px at 20% 15%, rgba(0, 0, 0, 0.045), transparent 55%),
+    radial-gradient(1000px 800px at 85% 25%, rgba(0, 0, 0, 0.03), transparent 60%),
+    radial-gradient(900px 700px at 30% 85%, rgba(0, 0, 0, 0.02), transparent 60%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.entourage-page__header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.entourage-page__titleImage {
+  display: block;
+  width: min(320px, 82vw);
+  height: auto;
+  margin: 8px auto 10px;
+  user-select: none;
+}
+
+.entourage-page__ornament {
+  width: min(520px, 82vw);
+  height: 14px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.entourage-page__ornament::before,
+.entourage-page__ornament::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 44%;
+  height: 1px;
+  background: rgba(20, 20, 18, 0.22);
+}
+
+.entourage-page__ornament::before {
+  left: 0;
+}
+
+.entourage-page__ornament::after {
+  right: 0;
+}
+
+.entourage-page__parents {
+  text-align: center;
+  display: grid;
+  gap: 18px;
+  margin: 18px 0 28px;
+}
+
+.entourage-block__title,
+.entourage-section__title {
+  font-family: var(--font-sans);
+  letter-spacing: 0.35em;
+  font-size: 16px;
+  text-transform: uppercase;
+  opacity: 0.78;
+  font-weight: 600;
+}
+
+.entourage-block__sub {
+  margin-top: 6px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.entourage-section {
+  margin-top: 35px;
+}
+
+.entourage-section__title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.entourage-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  justify-content: center;
+  align-items: start;
+  margin-top: 6px;
+}
+
+.entourage-cols--wide {
+  gap: 56px;
+  margin-top: 8px;
+}
+
+.entourage-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  line-height: 1.9;
+  opacity: 0.72;
+}
+
+.entourage-list--tight {
+  line-height: 1.75;
+}
+
+.entourage-triple {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+  margin-top: 10px;
+  align-items: start;
+}
+
+.entourage-mini {
+  text-align: center;
+  padding-top: 12px;
+}
+
+.entourage-mini__label {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  opacity: 0.68;
+  margin-bottom: 8px;
+}
+
+.entourage-section--pair {
+  margin-top: 18px;
+}
+
+.entourage-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  margin-top: 10px;
+  align-items: start;
+}
+
+.entourage-block--center {
+  text-align: center;
+}
+
+.entourage-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 54px;
+  margin-top: 10px;
+  align-items: start;
+}
+
+.entourage-triple--bearers {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+}
+
+/* ivy decorations */
+.entourage-page__ivy {
+  position: absolute;
+  width: min(400px, 34vw);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+
+
+  will-change: transform, filter, opacity;
+}
+
+.entourage-page__ivy--left {
+  top: -16px;
+  left: -8px;
+  right: auto;
+  z-index: 7;
+}
+
+.entourage-page__ivy--right {
+  right: -28px;
+  top: -56px;
+  left: auto;
+  z-index: 6;
+  opacity: 0.9 !important;
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+  .entourage-page__frame {
+    width: min(980px, 100% - 12vw);
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+}
+
+@media (max-width: 820px) {
+  .entourage-page__frame {
+    width: calc(100% - 40px);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .entourage-cols,
+  .entourage-pair,
+  .entourage-bottom {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .entourage-triple {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .entourage-page__inner {
+    padding: 54px 18px 64px;
+  }
+
+  .entourage-page__ivy {
+    width: min(210px, 44vw);
+  }
+
+  .entourage-page__ivy--left {
+    top: 0px;
+    left: 0px;
+  }
+
+  .entourage-page__ivy--right {
+    top: -22px;
+    right: -12px;
+  }
+
+  .entourage-page__titleImage {
+  display: block;
+  width: min(220px, 82vw);
+  height: auto;
+  margin: 8px auto 10px;
+  user-select: none;
+}
+}
+
+.entourage-page__ivy {
+  will-change: transform, filter, opacity;
+  backface-visibility: hidden;
+}
+
+.entourage-page__header,
+.entourage-page__parents,
+.entourage-section,
+.entourage-triple {
+  will-change: transform, opacity, filter;
+}

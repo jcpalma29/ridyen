@@ -1,0 +1,64 @@
+/* DressPage.css */
+
+.dress-page{
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 48px) clamp(12px, 4vw, 24px) 48px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.dress-page__inner{
+  width: min(920px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 3vw, 26px);
+}
+
+/* Top image */
+.dress-page__wag{
+  width: clamp(200px, 72vw, 320px);
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Bottom image */
+.dress-page__dress{
+  width: min(100%, 860px);
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* phones */
+@media (max-width: 480px){
+  .dress-page{
+    min-height: auto;
+    padding: 16px 14px 24px;
+  }
+
+  .dress-page__inner{
+    gap: 16px;
+  }
+
+  .dress-page__wag{
+    width: min(86vw, 180px);
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+}
+
+/* tablets */
+@media (min-width: 768px){
+  .dress-page{
+    padding: clamp(20px, 4vw, 56px) 24px 56px;
+  }
+
+  .dress-page__wag{
+    width: clamp(240px, 34vw, 320px);
+  }
+}

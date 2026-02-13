@@ -1,0 +1,241 @@
+.rsvp-page{
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  padding: clamp(26px, 5vw, 56px) 16px 64px;
+  box-sizing: border-box;
+}
+
+.rsvp-page__inner{
+  width: min(760px, 100%);
+}
+
+.rsvp-page__title{
+  margin: 0 0 18px;
+  text-align: center;
+  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-weight: 500;
+  color: #2a3a29;
+  font-size: clamp(30px, 4.4vw, 46px);
+}
+
+.rsvp-form{
+  /* ✅ changed: use image background */
+  background-image: url("/rsvpbg.png");
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+
+  border: 1px solid rgba(30, 30, 26, 0.15);
+  border-radius: 12px;
+  padding: clamp(16px, 3.2vw, 46px);
+  display: grid;
+  gap: 18px;
+}
+
+/* Text inputs */
+.rsvp-field{
+  display: grid;
+  gap: 10px;
+}
+
+.rsvp-label{
+  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  color: rgba(20, 20, 18, 0.85);
+  font-size: 15px;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+.rsvp-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.rsvp-input{
+  width: 100%;
+  border: 1px solid rgba(30, 30, 26, 0.18);
+  border-radius: 10px;
+  padding: 12px 5px 12px 0px;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  outline: none;
+  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  color: rgba(20, 20, 18, 0.9);
+}
+
+.rsvp-input:focus{
+  border-color: rgba(42, 58, 41, 0.5);
+}
+
+/* Radio section (Google Forms-like) */
+.rsvp-fieldset{
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.rsvp-legend{
+  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-size: 16px;
+  line-height: 1.25;
+  color: rgba(20, 20, 18, 0.9);
+  opacity: 0.8;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.rsvp-required{
+  color: #c0392b;
+  margin-left: 2px;
+}
+
+.rsvp-radioGroup{
+  display: grid;
+  gap: 12px;
+}
+
+.rsvp-radio{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 2px;
+}
+
+/* hide default radio */
+.rsvp-radio input{
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* custom circle */
+.rsvp-radio__dot{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(70, 70, 70, 0.55);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+/* inner fill */
+.rsvp-radio__dot::after{
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  transform: scale(0);
+  transition: transform 140ms ease;
+  background: rgba(122, 98, 52, 0.9);
+}
+
+/* label text */
+.rsvp-radio__text{
+  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-size: 16px;
+  line-height: 1.25;
+  color: rgba(20, 20, 18, 0.9);
+  opacity: 0.8;
+}
+
+/* checked state */
+.rsvp-radio input:checked + .rsvp-radio__dot{
+  border-color: rgba(122, 98, 52, 0.9);
+}
+
+.rsvp-radio input:checked + .rsvp-radio__dot::after{
+  transform: scale(1);
+}
+
+/* focus */
+.rsvp-radio input:focus-visible + .rsvp-radio__dot{
+  outline: 2px solid rgba(122, 98, 52, 0.35);
+  outline-offset: 3px;
+}
+
+/* Submit */
+.rsvp-submit{
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #2a3a29;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.rsvp-submit:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rsvp-status{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+}
+
+.rsvp-status--success{
+  color: rgba(42, 58, 41, 0.9);
+}
+
+.rsvp-status--error{
+  color: rgba(130, 32, 32, 0.9);
+}
+
+.rsvp-name{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.faq-page__titleImg{
+  display: block;
+  margin: 0 auto 26px;
+  width: clamp(260px, 60vw, 280px);
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* centered italic helper text under rsvp image */
+.rsvp-page__subtitle{
+  margin: -10px 0 18px;
+  text-align: center;
+  font-style: italic;
+  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  color: rgba(20, 20, 18, 0.72);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ✅ added: date wrapper so mobile can force a new line */
+.rsvp-page__date{
+  display: inline;
+}
+
+/* Responsive */
+@media (max-width: 640px){
+  .rsvp-row{
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp-radio__text{
+    font-size: 15px;
+  }
+}
+
+/* ✅ added: force the entire date to next line on mobile */
+@media (max-width: 480px){
+  .rsvp-page__date{
+    display: block;
+  }
+}

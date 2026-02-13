@@ -1,0 +1,69 @@
+/* Footer.css */
+.footer{
+  width: 100%;
+  background: #5a6a47;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  padding: 34px 16px;
+  box-sizing: border-box;
+}
+
+.footer__inner{
+  width: min(980px, 100%);
+  text-align: center;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  padding: 20px;
+}
+
+.footer__heart{
+  opacity: 0.9;
+  display: grid;
+  place-items: center;
+  margin-bottom: 10px;
+}
+
+.footer__heartIcon{
+  display: block;
+}
+
+.footer__names{
+  margin: 0;
+  font-family: var(--font-script, "Great Vibes", "Snell Roundhand", "Zapfino", "Brush Script MT", cursive);
+  font-weight: 600;
+  font-size: clamp(26px, 4.6vw, 40px);
+  line-height: 1.1;
+  letter-spacing: 0.2px;
+}
+
+.footer__date{
+  margin: 0;
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: 12.5px;
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+.footer__credit{
+  margin: 8px 0 0;
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: 11.5px;
+  opacity: 0.75;
+}
+
+/* tighter on phones */
+@media (max-width: 480px){
+  .footer{
+    padding: 28px 14px;
+  }
+
+  .footer__inner{
+    gap: 9px;
+  }
+
+  .footer__credit{
+    margin-top: 6px;
+  }
+}

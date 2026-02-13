@@ -1,0 +1,127 @@
+/* styles.css */
+html,
+body{
+  height: 100%;
+  margin: 0;
+  background: #797a65;
+}
+
+.page{
+  min-height: 100vh;
+  position: relative;
+  background: #797a65;
+}
+
+/* Intro video wrapper */
+.bgVideo{
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.bgVideo.isNonInteractive{
+  pointer-events: none;
+  cursor: default;
+}
+
+/* feather */
+/* .bgVideo::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(121,122,101,0) 58%,
+    rgba(121,122,101,0.55) 78%,
+    rgba(121,122,101,1) 100%
+  );
+} */
+
+.bgVideo__video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* click to open */
+.bgVideo__tip{
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px) saturate(140%);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* scroll prompt */
+.scrollPrompt{
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.45);
+  backdrop-filter: blur(10px) saturate(140%);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.20),
+    inset 0 1px 0 rgba(255,255,255,0.22);
+}
+
+.scrollPrompt__arrow{
+  width: 16px;
+  height: 16px;
+  opacity: 0.95;
+}
+
+/* Content */
+.content{
+  position: relative;
+  z-index: 1;
+  display: block;
+  background: #eeeeec; /* ensures white background once intro disappears */
+  min-height: 100vh;
+}
+
+.isHidden{
+  display: none;
+}
+
+/* IMPORTANT: remove the 100vh gap */
+.isVisible{
+  display: block;
+  margin-top: 0;
+}
