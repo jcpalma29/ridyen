@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useMemo, useRef, useState } from "react"
+import {useMemo, useRef, useState} from "react"
 import "./RsvpPage.css"
 
 type AttendChoice = "accept" | "decline" | ""
@@ -17,11 +17,9 @@ export default function RsvpPage() {
 
   const iframeName = useRef(`gf_iframe_${Math.random().toString(36).slice(2)}`)
 
-  // ✅ Use formResponse endpoint (correct)
   const GOOGLE_FORM_ACTION_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLSewS88Q3ww1wjm-2fuutzSXfECXkzYY8dt0cbQ1lqrsJFKgww/formResponse"
 
-  // ✅ Correct entry IDs (from your prefill link)
   const entry = useMemo(
     () => ({
       attend: "entry.877086558",
@@ -32,8 +30,6 @@ export default function RsvpPage() {
     [],
   )
 
-  // ✅ IMPORTANT: These must match Google Form option labels EXACTLY
-  // NOTE: Your Google Form choice has TWO spaces after the comma.
   const ATTEND_ACCEPT_LABEL = "Yes, I accept with pleasure"
   const ATTEND_DECLINE_LABEL = "Declines with regrets"
 
@@ -45,7 +41,6 @@ export default function RsvpPage() {
     !isSubmitting
 
   const submitViaHiddenForm = (payload: Record<string, string>) => {
-    // Create a real form post (more reliable than fetch for Google Forms)
     const form = document.createElement("form")
     form.action = GOOGLE_FORM_ACTION_URL
     form.method = "POST"
@@ -82,11 +77,9 @@ export default function RsvpPage() {
         [entry.lastName]: lastName.trim(),
         [entry.entourageChild]: entourageLabel,
 
-        // ✅ Google Forms hidden fields (helps prevent 401 / rejected posts)
         fvv: "1",
         draftResponse: "[]",
         pageHistory: "0",
-
         fbzx: "-6593670443021045026",
       })
 
@@ -113,15 +106,14 @@ export default function RsvpPage() {
         />
 
         <p className="rsvp-page__subtitle">
-          Please let us know if you&apos;ll be able to make it before
+          Please let us know if you can confirm your attendance by
           <span className="rsvp-page__date"> Feb. 28, 2026.</span>
         </p>
 
-        {/* hidden iframe target for Google Forms submit */}
         <iframe
           name={iframeName.current}
           title="google-form-target"
-          style={{ display: "none" }}
+          style={{display: "none"}}
         />
 
         <form className="rsvp-form" onSubmit={onSubmit}>
@@ -234,6 +226,14 @@ export default function RsvpPage() {
             </p>
           )}
         </form>
+      </div>
+
+      {/* ✅ jcami.dev credit — now anchored to the whole section corner */}
+      <div className="rsvp-credit" aria-label="Site credit">
+        <img className="rsvp-credit__img" src="/jcd.png" alt="jcami.dev" draggable={false} />
+        <div className="rsvp-credit__tooltip" role="tooltip">
+          This website is developed by jcami.dev
+        </div>
       </div>
     </section>
   )

@@ -5,6 +5,7 @@
   justify-content: center;
   padding: clamp(26px, 5vw, 56px) 16px 64px;
   box-sizing: border-box;
+  position: relative; /* ✅ anchor credit to whole section */
 }
 
 .rsvp-page__inner{
@@ -21,7 +22,6 @@
 }
 
 .rsvp-form{
-  /* ✅ changed: use image background */
   background-image: url("/rsvpbg.png");
   background-size: cover;
   background-position: right center;
@@ -34,7 +34,6 @@
   gap: 18px;
 }
 
-/* Text inputs */
 .rsvp-field{
   display: grid;
   gap: 10px;
@@ -70,7 +69,6 @@
   border-color: rgba(42, 58, 41, 0.5);
 }
 
-/* Radio section (Google Forms-like) */
 .rsvp-fieldset{
   border: 0;
   padding: 0;
@@ -106,14 +104,12 @@
   padding: 4px 2px;
 }
 
-/* hide default radio */
 .rsvp-radio input{
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
-/* custom circle */
 .rsvp-radio__dot{
   width: 18px;
   height: 18px;
@@ -124,7 +120,6 @@
   flex: 0 0 auto;
 }
 
-/* inner fill */
 .rsvp-radio__dot::after{
   content: "";
   width: 9px;
@@ -135,7 +130,6 @@
   background: rgba(122, 98, 52, 0.9);
 }
 
-/* label text */
 .rsvp-radio__text{
   font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
   font-size: 16px;
@@ -144,7 +138,6 @@
   opacity: 0.8;
 }
 
-/* checked state */
 .rsvp-radio input:checked + .rsvp-radio__dot{
   border-color: rgba(122, 98, 52, 0.9);
 }
@@ -153,13 +146,11 @@
   transform: scale(1);
 }
 
-/* focus */
 .rsvp-radio input:focus-visible + .rsvp-radio__dot{
   outline: 2px solid rgba(122, 98, 52, 0.35);
   outline-offset: 3px;
 }
 
-/* Submit */
 .rsvp-submit{
   width: 100%;
   border: 0;
@@ -206,7 +197,6 @@
   pointer-events: none;
 }
 
-/* centered italic helper text under rsvp image */
 .rsvp-page__subtitle{
   margin: -10px 0 18px;
   text-align: center;
@@ -217,12 +207,10 @@
   line-height: 1.6;
 }
 
-/* ✅ added: date wrapper so mobile can force a new line */
 .rsvp-page__date{
   display: inline;
 }
 
-/* Responsive */
 @media (max-width: 640px){
   .rsvp-row{
     grid-template-columns: 1fr;
@@ -233,9 +221,90 @@
   }
 }
 
-/* ✅ added: force the entire date to next line on mobile */
 @media (max-width: 480px){
   .rsvp-page__date{
     display: block;
+  }
+}
+
+/* ✅ jcami.dev credit (bottom-right OUTSIDE the form, corner of section) */
+.rsvp-credit{
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 20;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+}
+
+/* replace your existing .rsvp-credit__img with this */
+.rsvp-credit__img{
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  user-select: none;
+  border-radius: 999px;
+  transition: box-shadow 200ms ease, transform 200ms ease, filter 200ms ease;
+}
+
+/* glowing green on hover + keyboard focus */
+.rsvp-credit:hover .rsvp-credit__img,
+.rsvp-credit:focus-within .rsvp-credit__img{
+  box-shadow:
+    0 0 10px rgba(42, 58, 41, 0.55),
+    0 0 22px rgba(42, 58, 41, 0.45),
+    0 0 40px rgba(42, 58, 41, 0.28);
+  filter: saturate(1.2);
+  transform: translateY(-1px);
+}
+
+
+/* replace your existing .rsvp-credit__tooltip with this */
+.rsvp-credit__tooltip{
+  position: absolute;
+  right: 50px;   /* ✅ more to the left */
+  bottom: 8px;  /* ✅ a bit higher */
+
+  white-space: nowrap;
+  padding: 8px 10px;
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.92); /* ✅ light */
+  color: rgba(20, 20, 18, 0.85);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+  border: 1px solid rgba(20, 20, 18, 0.10);
+}
+
+
+.rsvp-credit:hover .rsvp-credit__tooltip,
+.rsvp-credit:focus-within .rsvp-credit__tooltip{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 480px){
+  .rsvp-credit{
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .rsvp-credit__img{
+    width: 28px;
+    height: 28px;
+  }
+
+  .rsvp-credit__tooltip{
+    right: 34px;
   }
 }
