@@ -30,7 +30,7 @@
   min-height: calc(100vh - 80px);
   background: #ffffff;
   max-width: 920px;
-  margin: 0 auto;
+  margin: 45px auto 0 auto;
   padding: 62px 22px 70px;
   color: rgba(20, 20, 18, 0.78);
 }
@@ -253,6 +253,7 @@
 
   .entourage-page__inner {
     padding: 54px 18px 64px;
+    margin-top: 3px;
   }
 
   .entourage-page__ivy {
