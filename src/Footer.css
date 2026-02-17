@@ -1,5 +1,5 @@
 /* Footer.css */
-.footer{
+.footer {
   width: 100%;
   background: #5a6a47;
   color: #ffffff;
@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 
-.footer__inner{
+.footer__inner {
   width: min(980px, 100%);
   text-align: center;
   display: grid;
@@ -18,52 +18,71 @@
   padding: 20px;
 }
 
-.footer__heart{
+.footer__heart {
   opacity: 0.9;
   display: grid;
   place-items: center;
   margin-bottom: 10px;
 }
 
-.footer__heartIcon{
+.footer__heartIcon {
   display: block;
 }
 
-.footer__names{
+.footer__names {
   margin: 0;
-  font-family: var(--font-script, "Great Vibes", "Snell Roundhand", "Zapfino", "Brush Script MT", cursive);
+  /* font-family: var(--font-script, "Great Vibes", "Snell Roundhand", "Zapfino", "Brush Script MT", cursive); */
+  font-family: "Burgues", var(--font-serif);
   font-weight: 600;
-  font-size: clamp(26px, 4.6vw, 40px);
+  font-size: 36px !important;
   line-height: 1.1;
   letter-spacing: 0.2px;
 }
 
-.footer__date{
+/* ✅ date = sans */
+.footer__date {
   margin: 0;
-  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-family: var(
+    --font-sans,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif
+  );
   font-size: 12.5px;
   opacity: 0.9;
   margin-bottom: 15px;
 }
 
-.footer__credit{
+/* ✅ credit = sans */
+.footer__credit {
   margin: 8px 0 0;
-  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
-  font-size: 11.5px;
+  font-family: var(
+    --font-sans,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif
+  );
+  font-size: 14.5px;
   opacity: 0.75;
 }
 
 /* tighter on phones */
-@media (max-width: 480px){
-  .footer{
+@media (max-width: 480px) {
+  .footer {
     padding: 28px 14px;
   }
 
-  .footer__inner{
+  .footer__inner {
     gap: 9px;
   }
 
-  .footer__credit{
+  .footer__credit {
     margin-top: 6px;
   }
 }

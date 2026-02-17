@@ -9,6 +9,18 @@
   font-family: var(--font-serif);
 }
 
+/* NEW: title above cards */
+.details-page__programTitle {
+  position: relative;
+  z-index: 60;
+  text-align: center;
+  font-family: "Burgues", var(--font-serif);
+  font-size: 62px;
+  line-height: 1.1;
+  margin: 6px auto 18px auto !important;
+  padding: 15px 20px;
+}
+
 /* church + ivy block stays sticky together */
 .details-page__churchbg-wrap {
   position: sticky;
@@ -72,7 +84,6 @@
 .details-page__cards {
   position: relative;
   z-index: 60;
-
   max-width: 880px;
   margin: 0 auto;
   padding: 0 20px;
@@ -83,16 +94,17 @@
   margin-top: 0px;
 
   /* IMPORTANT: ensures you actually see the fade-in */
-  opacity: 0;
+  opacity: 0.7 !important;
   transform: translateY(18px);
   will-change: opacity, transform;
+
 }
 
 .details-card {
   background: #fff;
   border-radius: 14px;
   padding: 18px 18px 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
@@ -232,6 +244,13 @@
   color: rgba(31, 41, 55, 0.75);
 }
 
+.timeline-item__iconImg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+}
+
 .timeline-item__title {
   font-family: var(--font-serif);
   font-size: 16px;
@@ -244,6 +263,11 @@
   .details-page__cards {
     grid-template-columns: 1fr;
     margin-top: 26px;
+  }
+
+  .details-page__programTitle {
+    font-size: 36px;
+    margin-bottom: 16px;
   }
 }
 

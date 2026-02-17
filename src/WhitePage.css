@@ -1,3 +1,5 @@
+/* WhitePage.css */
+
 .whitePage{
   min-height: 100vh;
   background: #eeeeec;
@@ -5,8 +7,8 @@
   overflow: hidden;
   opacity: 1;
 
-  /* wedding default */
-  font-family: var(--font-serif);
+  /* ✅ force Neue (neue-reg.ttf) for all text in this component */
+  font-family: var(--font-italic);
 }
 
 .whitePage__content{
@@ -36,7 +38,6 @@
   padding-top: 140%;
 }
 
-/* ivy is tied to the stack (moves with scroll naturally), but stays still (no float transform) */
 .whitePage__ivy{
   position: absolute;
   left: 50%;
@@ -91,7 +92,7 @@
   transform: translateX(-50%);
   width: min(520px, calc(100vw - 56px));
   text-align: center;
-  top: calc(22px + 490px);
+  top: calc(36px + 490px);
   z-index: 4;
 }
 
@@ -101,7 +102,7 @@
   font-size: 18px;
   line-height: 1.55;
   color: rgba(20, 20, 18, 0.78);
-  font-family: var(--font-serif);
+  font-family: inherit;
 }
 
 /* rny image (smaller, responsive) */
@@ -121,7 +122,7 @@
   margin: 16px auto 0 auto;
   text-align: center;
   color: #5a6a47;
-  font-family: var(--font-serif);
+ font-family: var(--font-sans);
   text-transform: uppercase;
   z-index: 5;
 }

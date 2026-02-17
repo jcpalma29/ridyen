@@ -12,6 +12,17 @@
   width: min(760px, 100%);
 }
 
+/* ✅ NEW: Burgues RSVP heading */
+.rsvp-page__heading{
+  margin: 0 0 10px;
+  text-align: center;
+  font-family: "Burgues", var(--font-serif);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(20, 20, 18, 0.85);
+  font-size: 62px;
+}
+
 .rsvp-page__title{
   margin: 0 0 18px;
   text-align: center;
@@ -39,8 +50,9 @@
   gap: 10px;
 }
 
+/* ✅ QUESTIONS (sans) */
 .rsvp-label{
-  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
   color: rgba(20, 20, 18, 0.85);
   font-size: 15px;
   opacity: 0.8;
@@ -53,6 +65,7 @@
   gap: 14px;
 }
 
+/* ✅ INPUTS (sans) */
 .rsvp-input{
   width: 100%;
   border: 1px solid rgba(30, 30, 26, 0.18);
@@ -61,7 +74,7 @@
   background: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   outline: none;
-  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
   color: rgba(20, 20, 18, 0.9);
 }
 
@@ -75,8 +88,9 @@
   margin: 0;
 }
 
+/* ✅ QUESTIONS (sans) */
 .rsvp-legend{
-  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
   font-size: 16px;
   line-height: 1.25;
   color: rgba(20, 20, 18, 0.9);
@@ -130,8 +144,9 @@
   background: rgba(122, 98, 52, 0.9);
 }
 
+/* ✅ ANSWERS / OPTIONS (sans) */
 .rsvp-radio__text{
-  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
   font-size: 16px;
   line-height: 1.25;
   color: rgba(20, 20, 18, 0.9);
@@ -201,9 +216,9 @@
   margin: -10px 0 18px;
   text-align: center;
   font-style: italic;
-  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
   color: rgba(20, 20, 18, 0.72);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -266,6 +281,8 @@
   position: absolute;
   right: 50px;   /* ✅ more to the left */
   bottom: 8px;  /* ✅ a bit higher */
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
+
 
   white-space: nowrap;
   padding: 8px 10px;
@@ -283,7 +300,6 @@
   box-shadow: 0 10px 26px rgba(0,0,0,0.12);
   border: 1px solid rgba(20, 20, 18, 0.10);
 }
-
 
 .rsvp-credit:hover .rsvp-credit__tooltip,
 .rsvp-credit:focus-within .rsvp-credit__tooltip{

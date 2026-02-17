@@ -1,6 +1,6 @@
 /* DressPage.css */
 
-.dress-page{
+.dress-page {
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -10,7 +10,7 @@
   background: #ffffff;
 }
 
-.dress-page__inner{
+.dress-page__inner {
   width: min(920px, 100%);
   display: flex;
   flex-direction: column;
@@ -19,46 +19,88 @@
 }
 
 /* Top image */
-.dress-page__wag{
+.dress-page__wag {
   width: clamp(200px, 72vw, 320px);
   max-width: 100%;
   height: auto;
   display: block;
 }
 
+.dress-page__heading {
+  margin: 0;
+  text-align: center;
+  font-family: "Burgues", var(--font-serif);
+  font-size: 62px !important;
+  line-height: 1.05;
+  font-weight: 400;
+  padding-bottom: 25px;
+}
+
+.dress-page__subtitle {
+  margin: -10px 0 18px;
+  text-align: center;
+  font-style: italic;
+  font-family: var(
+    --font-sans,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif
+  );
+  color: rgba(20, 20, 18, 0.72);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 760px;
+}
+
 /* Bottom image */
-.dress-page__dress{
-  width: min(100%, 860px);
+.dress-page__dress {
+  width: min(100%, 760px);
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.dress-page__shade {
+  width: min(100%, 360px);
   max-width: 100%;
   height: auto;
   display: block;
 }
 
 /* phones */
-@media (max-width: 480px){
-  .dress-page{
+@media (max-width: 480px) {
+  .dress-page {
     min-height: auto;
     padding: 16px 14px 24px;
   }
 
-  .dress-page__inner{
+  .dress-page__inner {
     gap: 16px;
   }
 
-  .dress-page__wag{
+  .dress-page__wag {
     width: min(86vw, 180px);
     margin-top: 25px;
     margin-bottom: 15px;
   }
+  .dress-page__heading {
+    font-size: 36px !important;
+    margin: 35px 10px 0px 10px !important;
+  }
+  .dress-page__shade {
+    margin-bottom: 25px;
+  }
 }
 
 /* tablets */
-@media (min-width: 768px){
-  .dress-page{
+@media (min-width: 768px) {
+  .dress-page {
     padding: clamp(20px, 4vw, 56px) 24px 56px;
   }
 
-  .dress-page__wag{
+  .dress-page__wag {
     width: clamp(240px, 34vw, 320px);
   }
 }

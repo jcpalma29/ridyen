@@ -1,3 +1,5 @@
+/* FaqPage.css */
+
 .faq-page{
   min-height: auto;
   background: #fff;
@@ -9,7 +11,31 @@
 
 .faq-page__inner{
   width: min(760px, 100%);
+  text-align: left; /* ✅ left align container so it stays left on all sizes */
+}
+
+/* ✅ Burgues heading */
+.faq-page__heading{
+  margin: 0;
   text-align: center;
+  font-family: "Burgues", var(--font-serif);
+  font-size: 62px;
+  line-height: 1.05;
+  font-weight: 400;
+  padding-bottom: 25px;
+}
+
+/* responsive heading */
+@media (max-width: 820px){
+  .faq-page__heading{
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 520px){
+  .faq-page__heading{
+    font-size: 30px;
+  }
 }
 
 .faq-page__icon{
@@ -38,7 +64,7 @@
   border: 1px solid rgba(30, 30, 26, 0.15);
   border-radius: 10px;
   overflow: hidden;
-  text-align: left;
+  text-align: left; /* ✅ keep left aligned */
   backdrop-filter: blur(2px);
 }
 
@@ -53,6 +79,7 @@
   gap: 14px;
   cursor: pointer;
   color: rgba(20, 20, 18, 0.9);
+  text-align: left; /* ✅ keep left aligned even on mobile */
 }
 
 .faq-item__q{
@@ -60,6 +87,7 @@
   font-size: 16px;
   line-height: 1.25;
   opacity: 0.8 !important;
+  text-align: left; /* ✅ */
 }
 
 .faq-item__chev{
@@ -89,7 +117,27 @@
   color: rgba(20, 20, 18, 0.72);
   font-size: 14px;
   line-height: 1.6;
-  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+
+  /* ✅ answers are sans now */
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
+
+  text-align: left; /* ✅ */
+}
+
+/* ✅ NEW: paragraph renderer styles (for bold + new lines) */
+.faq-item__p{
+  margin: 0;
+  text-align: left;
+}
+
+.faq-item__p + .faq-item__p{
+  margin-top: 10px;
+}
+
+/* bold token style */
+.faq-item__strong{
+  font-family: "NeueMontreal", var(--font-sans);
+  font-weight: 700;
 }
 
 .faq-page__titleImg{
@@ -122,4 +170,69 @@
   .faq-page__titleImg{
     margin: 0 auto 18px;
   }
+}
+
+/* ✅ Memorial text below the list */
+.faq-page__memorial{
+  margin-top: clamp(22px, 5vw, 34px);
+  text-align: center;
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
+  color: rgba(20, 20, 18, 0.78);
+}
+
+.faq-page__memorialQuote{
+  margin: 0 auto 10px;
+  max-width: 66ch;
+  font-size: clamp(14px, 1.7vw, 16px);
+  line-height: 1.7;
+}
+
+.faq-page__memorialName{
+  margin: 0;
+  font-size: clamp(13px, 1.6vw, 15px);
+  line-height: 1.45;
+  opacity: 0.9;
+
+  /* ✅ important: don’t override the bold span’s font */
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
+}
+
+.faq-page__memorialNameStrong{
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
+  font-weight: 800; /* try higher than 700 */
+
+  /* fallback “bold look” even if font has no bold weight */
+  text-shadow: 0.35px 0 0 currentColor, -0.35px 0 0 currentColor;
+}
+
+/* ✅ NEW: sentinel (invisible) */
+.faq-page__bottomSentinel{
+  height: 1px;
+}
+
+/* ✅ NEW: typewriter caret */
+.faq-page__typeCaret{
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  vertical-align: -0.12em;
+  margin-left: 2px;
+  background: currentColor;
+  opacity: 0;
+}
+
+/* show caret while typing, hide when done */
+.faq-page__memorial.is-typing .faq-page__typeCaret{
+  opacity: 0.9;
+  animation: faqCaretBlink 900ms steps(1, end) infinite;
+}
+
+.faq-page__memorial.is-done .faq-page__typeCaret{
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes faqCaretBlink{
+  0%, 49% { opacity: 0.9; }
+  50%, 100% { opacity: 0; }
 }

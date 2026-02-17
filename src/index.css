@@ -1,13 +1,67 @@
+/* index.css */
+
+/* ✅ local fonts (src/assets/fonts/...) */
+@font-face {
+  font-family: "TheSeasons";
+  src: url("./assets/fonts/theseasons-reg.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSeasons";
+  src: url("./assets/fonts/theseasons-bd.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue";
+  src: url("./assets/fonts/neue-reg.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ✅ Neue Montreal Italic */
+@font-face {
+  font-family: "NeueMontreal";
+  src: url("./assets/fonts/NeueMontreal-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NeueMontreal";
+  src: url("./assets/fonts/NeueMontreal-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Burgues";
+  src: url("./assets/fonts/burgues.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* wedding fonts */
-  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --font-sans: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  /* wedding fonts (LOCAL) */
+  --font-serif: "TheSeasons", Georgia, "Times New Roman", serif;
+  --font-sans: "Neue", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  /* italic font */
+  --font-italic: "NeueMontreal", var(--font-sans);
 
   font-family: var(--font-serif);
   line-height: 1.5;
   font-weight: 400;
 
-  /* force light look (your pages are light) */
   color-scheme: light;
   color: #213547;
   background-color: #ffffff;
@@ -32,7 +86,6 @@ body {
   min-width: 320px;
   min-height: 100vh;
 
-  /* IMPORTANT: remove centering from Vite default */
   display: block;
   place-items: initial;
 

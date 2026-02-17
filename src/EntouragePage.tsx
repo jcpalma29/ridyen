@@ -1,28 +1,28 @@
-import {useEffect, useRef} from "react"
-import gsap from "gsap"
-import {ScrollTrigger} from "gsap/ScrollTrigger"
-import "./EntouragePage.css"
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./EntouragePage.css";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 export default function EntouragePage() {
-  const ivyLeftRef = useRef<HTMLImageElement | null>(null)
-  const ivyRightRef = useRef<HTMLImageElement | null>(null)
-  const contentRef = useRef<HTMLDivElement | null>(null)
+  const ivyLeftRef = useRef<HTMLImageElement | null>(null);
+  const ivyRightRef = useRef<HTMLImageElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const left = ivyLeftRef.current
-    const right = ivyRightRef.current
-    const content = contentRef.current
-    if (!left || !right || !content) return
+    const left = ivyLeftRef.current;
+    const right = ivyRightRef.current;
+    const content = contentRef.current;
+    if (!left || !right || !content) return;
 
     const ctx = gsap.context(() => {
-      gsap.killTweensOf([left, right])
+      gsap.killTweensOf([left, right]);
 
       // -----------------------
       // IVY ANIMATION (yours)
       // -----------------------
-      gsap.set([left, right], {clearProps: "transform,filter,opacity"})
+      gsap.set([left, right], { clearProps: "transform,filter,opacity" });
 
       gsap.set(left, {
         x: -18,
@@ -30,7 +30,7 @@ export default function EntouragePage() {
         opacity: 0,
         filter: "blur(1px)",
         force3D: true,
-      })
+      });
 
       gsap.set(right, {
         x: 18,
@@ -38,9 +38,9 @@ export default function EntouragePage() {
         opacity: 0,
         filter: "blur(1px)",
         force3D: true,
-      })
+      });
 
-      const intro = gsap.timeline({delay: 0.15})
+      const intro = gsap.timeline({ delay: 0.15 });
 
       intro
         .to([left, right], {
@@ -57,39 +57,39 @@ export default function EntouragePage() {
             duration: 1.8,
             ease: "power3.out",
           },
-          0
-        )
+          0,
+        );
 
       const floatLeft = gsap.timeline({
         repeat: -1,
         yoyo: true,
-        defaults: {ease: "sine.inOut"},
+        defaults: { ease: "sine.inOut" },
         delay: 2.0,
-      })
+      });
 
       floatLeft
-        .to(left, {y: -12, x: 2, duration: 3.4, force3D: true})
-        .to(left, {y: -6, x: -4, duration: 3.0, force3D: true})
+        .to(left, { y: -12, x: 2, duration: 3.4, force3D: true })
+        .to(left, { y: -6, x: -4, duration: 3.0, force3D: true });
 
       const floatRight = gsap.timeline({
         repeat: -1,
         yoyo: true,
-        defaults: {ease: "sine.inOut"},
+        defaults: { ease: "sine.inOut" },
         delay: 2.15,
-      })
+      });
 
       floatRight
-        .to(right, {y: -12, x: -4, duration: 3.8, force3D: true})
-        .to(right, {y: -7, x: 5, duration: 3.2, force3D: true})
+        .to(right, { y: -12, x: -4, duration: 3.8, force3D: true })
+        .to(right, { y: -7, x: 5, duration: 3.2, force3D: true });
 
       // -----------------------
       // TEXT: MORE OBVIOUS + FULL OPACITY AT BOTTOM
       // -----------------------
       const items = Array.from(
         content.querySelectorAll<HTMLElement>(
-          ".entourage-page__header, .entourage-page__parents, .entourage-section, .entourage-triple"
-        )
-      )
+          ".entourage-page__header, .entourage-page__parents, .entourage-section, .entourage-triple",
+        ),
+      );
 
       // stronger hidden state (more obvious)
       gsap.set(items, {
@@ -97,30 +97,32 @@ export default function EntouragePage() {
         y: 70,
         filter: "blur(4px)",
         force3D: true,
-      })
+      });
 
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: content,
-          start: "top 85%",
-          end: "bottom bottom", // ensures at the bottom: progress === 1
-          scrub: 0.6,
-          invalidateOnRefresh: true,
-          // markers: true,
-        },
-        defaults: {ease: "power2.out"},
-      }).to(items, {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        duration: 1,
-        stagger: 0.16, // top -> bottom, more pronounced
-        overwrite: "auto",
-      })
-    }, contentRef)
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: content,
+            start: "top 85%",
+            end: "bottom bottom", // ensures at the bottom: progress === 1
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+            // markers: true,
+          },
+          defaults: { ease: "power2.out" },
+        })
+        .to(items, {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 1,
+          stagger: 0.16, // top -> bottom, more pronounced
+          overwrite: "auto",
+        });
+    }, contentRef);
 
-    return () => ctx.revert()
-  }, [])
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section className="entourage-page" aria-label="Entourage">
@@ -144,7 +146,7 @@ export default function EntouragePage() {
         />
 
         <div ref={contentRef} className="entourage-page__inner">
-          <header className="entourage-page__header">
+          {/* <header className="entourage-page__header">
             <img
               className="entourage-page__titleImage"
               src="/bdet.png"
@@ -152,30 +154,39 @@ export default function EntouragePage() {
               loading="eager"
               draggable={false}
             />
+          </header> */}
 
-          </header>
+          {/* NEW: title above parents */}
+          <h2 className="entourage-page__titleText">The Entourage</h2>
 
           <div className="entourage-page__parents">
             <div className="entourage-block">
               <div className="entourage-block__title">PARENTS OF THE BRIDE</div>
               <div className="entourage-block__sub">
-                LAURA ISABEL TRIGO &amp; PEDRO TRIGO
+                Mrs. Laura Isabel Trigo &amp; Blessed from above by the memory of{" "}
+                <span style={{ fontStyle: "italic" }}> Mr. Pedro M. Trigo</span>
               </div>
             </div>
 
             <div className="entourage-block">
               <div className="entourage-block__title">PARENTS OF THE GROOM</div>
               <div className="entourage-block__sub">
-                MELBA RAMOS &amp; RIGOR RAMOS
+               Mrs. Melba Ramos &amp; Mr. Rigor Ramos
               </div>
             </div>
           </div>
 
-          <section className="entourage-section" aria-label="Principal sponsors">
+          <section
+            className="entourage-section"
+            aria-label="Principal sponsors"
+          >
             <div className="entourage-section__title">PRINCIPAL SPONSORS</div>
 
             <div className="entourage-cols">
-              <ul className="entourage-list" aria-label="Principal sponsors left">
+              <ul
+                className="entourage-list"
+                aria-label="Principal sponsors left"
+              >
                 <li>TERESITA DEPAZ</li>
                 <li>ROSELYN DEPAZ</li>
                 <li>REMEDIOS CELESTE</li>
@@ -192,7 +203,10 @@ export default function EntouragePage() {
                 <li>MARILYN PAITIM</li>
               </ul>
 
-              <ul className="entourage-list" aria-label="Principal sponsors right">
+              <ul
+                className="entourage-list"
+                aria-label="Principal sponsors right"
+              >
                 <li>DANILO</li>
                 <li>LAUREL DEPAZ</li>
                 <li>RAMIR CELESTE</li>
@@ -211,11 +225,50 @@ export default function EntouragePage() {
             </div>
           </section>
 
-          <section className="entourage-section" aria-label="Secondary sponsors">
+          <section
+            className="entourage-section"
+            aria-label="Secondary sponsors"
+          >
             <div className="entourage-section__title">SECONDARY SPONSORS</div>
           </section>
+          <div className="entourage-triple">
+            <div className="entourage-mini">
+              <div className="entourage-mini__label">VEIL</div>
+              <ul
+                className="entourage-list entourage-list--tight"
+                aria-label="Candle sponsors"
+              >
+                <li>MRS HAZEL CRUZ</li>
+                <li>MR MICHAEL CRUZ</li>
+              </ul>
+            </div>
 
-          <section className="entourage-section entourage-section--pair" aria-label="Honor attendants">
+            <div className="entourage-mini">
+              <div className="entourage-mini__label">CANDLE</div>
+              <ul
+                className="entourage-list entourage-list--tight"
+                aria-label="Veil sponsors"
+              >
+                <li>MR KENT MARANON</li>
+                <li>MRS MARIE JOYCE HULLANA</li>
+              </ul>
+            </div>
+
+            <div className="entourage-mini">
+              <div className="entourage-mini__label">CORD</div>
+              <ul
+                className="entourage-list entourage-list--tight"
+                aria-label="Cord sponsors"
+              >
+                <li>MS HANZEL PONTINO</li>
+                <li>MR BABYLOU BALASA JR.</li>
+              </ul>
+            </div>
+          </div>
+              <section
+            className="entourage-section entourage-section--pair"
+            aria-label="Honor attendants"
+          >
             <div className="entourage-pair">
               <div className="entourage-block entourage-block--center">
                 <div className="entourage-block__title">MAID OF HONOR</div>
@@ -229,7 +282,10 @@ export default function EntouragePage() {
             </div>
           </section>
 
-          <section className="entourage-section" aria-label="Bridesmaids and groomsmen">
+          <section
+            className="entourage-section"
+            aria-label="Bridesmaids and groomsmen"
+          >
             <div className="entourage-cols entourage-cols--wide">
               <div>
                 <div className="entourage-section__title">BRIDESMAIDS</div>
@@ -265,33 +321,25 @@ export default function EntouragePage() {
             </div>
           </section>
 
-          <div className="entourage-triple">
-            <div className="entourage-mini">
-              <div className="entourage-mini__label">Candle</div>
-              <ul className="entourage-list entourage-list--tight" aria-label="Candle sponsors">
-                <li>MRS HAZEL CRUZ</li>
-                <li>MR MICHAEL CRUZ</li>
-              </ul>
-            </div>
+      
+          <section
+            className="entourage-section entourage-section--pair"
+            aria-label="Honor attendants"
+          >
+            <div className="entourage-pair">
+              <div className="entourage-block entourage-block--center">
+                <div className="entourage-block__title">ٍRING BEARER</div>
+                <div className="entourage-block__sub">SHAIRA MAE TRIGO</div>
+              </div>
 
-            <div className="entourage-mini">
-              <div className="entourage-mini__label">Veil</div>
-              <ul className="entourage-list entourage-list--tight" aria-label="Veil sponsors">
-                <li>MR KENT MARANON</li>
-                <li>MRS MARIE JOYCE HULLANA</li>
-              </ul>
+              <div className="entourage-block entourage-block--center">
+                <div className="entourage-block__title">FLOWER GIRL</div>
+                <div className="entourage-block__sub">RALPH DANIEL RAMOS</div>
+              </div>
             </div>
-
-            <div className="entourage-mini">
-              <div className="entourage-mini__label">Cord</div>
-              <ul className="entourage-list entourage-list--tight" aria-label="Cord sponsors">
-                <li>MS HANZEL PONTINO</li>
-                <li>MR BABYLOU BALASA JR.</li>
-              </ul>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </section>
-  )
+  );
 }

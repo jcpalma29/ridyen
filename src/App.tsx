@@ -15,6 +15,7 @@ gsap.registerPlugin(ScrollTrigger)
 export default function App() {
   const introWrapRef = useRef<HTMLDivElement | null>(null)
   const introVideoRef = useRef<HTMLVideoElement | null>(null)
+  const pagesRef = useRef<HTMLElement | null>(null)
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [introEnded, setIntroEnded] = useState(false)
@@ -47,20 +48,51 @@ export default function App() {
     v.load()
   }, [introVideoSrc])
 
+  // ✅ when pages mount, hard-land at the very top (WhitePage)
+  useEffect(() => {
+    if (!showPages) return
+
+    const jumpTop = () => {
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    }
+
+    jumpTop()
+    requestAnimationFrame(() => {
+      jumpTop()
+      pagesRef.current?.scrollIntoView({block: 'start'})
+      requestAnimationFrame(() => {
+        jumpTop()
+        ScrollTrigger.refresh()
+      })
+    })
+  }, [showPages])
+
   useEffect(() => {
     if (!introEnded) return
-
-    document.documentElement.style.overflow = ''
-    document.body.style.overflow = ''
 
     const introWrap = introWrapRef.current
     if (!introWrap) return
 
     let switched = false
 
+    const forceTopNow = () => {
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    }
+
     const switchToPages = () => {
       if (switched) return
       switched = true
+
+      // ✅ kill any stored scroll position BEFORE rendering pages
+      forceTopNow()
+
+      // keep scroll locked during the transition; the showPages effect will unlock after mount
+      document.documentElement.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden'
 
       setShowPages(true)
 
@@ -71,15 +103,34 @@ export default function App() {
         onComplete: () => {
           gsap.set(introWrap, {display: 'none'})
           introWrap.classList.add('isNonInteractive')
-          requestAnimationFrame(() => ScrollTrigger.refresh())
+
+          // ✅ beat wheel/touch momentum: snap top again after DOM updates
+          requestAnimationFrame(() => {
+            forceTopNow()
+            requestAnimationFrame(() => {
+              forceTopNow()
+              ScrollTrigger.refresh()
+            })
+          })
         },
       })
 
       cleanup()
     }
 
-    const onWheel = () => switchToPages()
-    const onTouchMove = () => switchToPages()
+    // ✅ prevent the "big scroll" from applying to the page
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      switchToPages()
+    }
+
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      switchToPages()
+    }
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'End') {
         e.preventDefault()
@@ -88,13 +139,14 @@ export default function App() {
     }
 
     const cleanup = () => {
-      window.removeEventListener('wheel', onWheel)
-      window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('wheel', onWheel as any, {capture: true} as any)
+      window.removeEventListener('touchmove', onTouchMove as any, {capture: true} as any)
       window.removeEventListener('keydown', onKeyDown)
     }
 
-    window.addEventListener('wheel', onWheel, {passive: true})
-    window.addEventListener('touchmove', onTouchMove, {passive: true})
+    // ✅ must be passive:false so preventDefault works
+    window.addEventListener('wheel', onWheel, {passive: false, capture: true})
+    window.addEventListener('touchmove', onTouchMove, {passive: false, capture: true})
     window.addEventListener('keydown', onKeyDown)
 
     return () => cleanup()
@@ -112,6 +164,9 @@ export default function App() {
 
       document.documentElement.style.overflow = 'hidden'
       document.body.style.overflow = 'hidden'
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
     } catch {
       setIsVideoPlaying(false)
     }
@@ -180,7 +235,7 @@ export default function App() {
       </div>
 
       {showPages && (
-        <main className='pages'>
+        <main ref={pagesRef} className='pages'>
           <WhitePage />
           <DetailsPage />
           <EntouragePage />
