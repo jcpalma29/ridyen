@@ -331,13 +331,13 @@
 @media (max-width: 820px) {
   .details-page__cards {
     grid-template-columns: 1fr;
-    margin-top: 26px;
+    margin-top: 20px;
     max-width: 720px;
   }
 
   .details-page__programTitle {
     font-size: 36px;
-    margin-bottom: 16px;
+    padding-bottom: 10px;
   }
 }
 
