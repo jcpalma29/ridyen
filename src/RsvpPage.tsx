@@ -207,7 +207,7 @@ export default function RsvpPage() {
           draggable={false}
         />
         <div className="rsvp-credit__tooltip" role="tooltip">
-          This website is developed by jcami.dev
+          This site is developed by jcami.dev
         </div>
       </div>
     </section>

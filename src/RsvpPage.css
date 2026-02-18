@@ -258,8 +258,8 @@
 
 /* replace your existing .rsvp-credit__img with this */
 .rsvp-credit__img{
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   object-fit: contain;
   user-select: none;
   border-radius: 999px;
@@ -279,8 +279,8 @@
 
 .rsvp-credit__tooltip{
   position: absolute;
-  right: 50px;   /* ✅ more to the left */
-  bottom: 8px;  /* ✅ a bit higher */
+  right: 45px;   /* ✅ more to the left */
+  bottom: 0px;  /* ✅ a bit higher */
   font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
 
 
