@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo, useRef, useState } from "react"
-import "./FaqPage.css"
+import { useEffect, useMemo, useRef, useState } from "react";
+import "./FaqPage.css";
 
 type FaqItem = {
-  q: string
-  a: string
-}
+  q: string;
+  a: string;
+};
 
 export default function FaqPage() {
   const faqs: FaqItem[] = useMemo(
@@ -65,19 +65,19 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
       },
     ],
     [],
-  )
+  );
 
-  const [openIndex, setOpenIndex] = useState<number>(-1)
+  const [openIndex, setOpenIndex] = useState<number>(-1);
 
   const toggle = (idx: number) => {
-    setOpenIndex((prev) => (prev === idx ? -1 : idx))
-  }
+    setOpenIndex((prev) => (prev === idx ? -1 : idx));
+  };
 
   const renderAnswer = (text: string) => {
-    const lines = text.split("\n")
+    const lines = text.split("\n");
 
     return lines.map((line, li) => {
-      const parts = line.split("**")
+      const parts = line.split("**");
 
       return (
         <p key={li} className="faq-item__p">
@@ -91,65 +91,80 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
             ),
           )}
         </p>
-      )
-    })
-  }
+      );
+    });
+  };
 
-  const bottomSentinelRef = useRef<HTMLDivElement | null>(null)
-  const [memorialStarted, setMemorialStarted] = useState(false)
+  const panelRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  // ✅ ADD: compute correct maxHeight when opening + on resize
+  useEffect(() => {
+    const updateOpenPanel = () => {
+      if (openIndex < 0) return;
+      const panel = panelRefs.current[openIndex];
+      if (!panel) return;
+      panel.style.maxHeight = `${panel.scrollHeight}px`;
+    };
+
+    updateOpenPanel();
+    window.addEventListener("resize", updateOpenPanel);
+    return () => window.removeEventListener("resize", updateOpenPanel);
+  }, [openIndex]);
+
+  const bottomSentinelRef = useRef<HTMLDivElement | null>(null);
+  const [memorialStarted, setMemorialStarted] = useState(false);
 
   const memorialQuoteFull =
-    "“Those we love don’t go away, they walk beside us every day. Unseen, unheard, but always near, still loved, still missed, and very dear.”"
+    "“Those we love don’t go away, they walk beside us every day. Unseen, unheard, but always near, still loved, still missed, and very dear.”";
 
-  const memorialNamePrefixFull =
-    `In loving memory of ${''}`
-  const memorialStrongFull = "Mr. Pedro M. Trigo"
-  const memorialNameSuffixFull = " – Father of the Bride"
+  const memorialNamePrefixFull = `In loving memory of ${""}`;
+  const memorialStrongFull = "Mr. Pedro M. Trigo";
+  const memorialNameSuffixFull = " – Father of the Bride";
 
-  const [typedQuote, setTypedQuote] = useState("")
-  const [typedNamePrefix, setTypedNamePrefix] = useState("")
-  const [typedStrong, setTypedStrong] = useState("")
-  const [typedNameSuffix, setTypedNameSuffix] = useState("")
-  const [typingDone, setTypingDone] = useState(false)
+  const [typedQuote, setTypedQuote] = useState("");
+  const [typedNamePrefix, setTypedNamePrefix] = useState("");
+  const [typedStrong, setTypedStrong] = useState("");
+  const [typedNameSuffix, setTypedNameSuffix] = useState("");
+  const [typingDone, setTypingDone] = useState(false);
 
   // keep timeout ids so we can cancel on unmount
-  const timeoutsRef = useRef<number[]>([])
+  const timeoutsRef = useRef<number[]>([]);
 
   useEffect(() => {
-    const el = bottomSentinelRef.current
-    if (!el) return
+    const el = bottomSentinelRef.current;
+    if (!el) return;
 
     const obs = new IntersectionObserver(
       (entries) => {
-        const entry = entries[0]
+        const entry = entries[0];
         if (entry?.isIntersecting) {
           // ✅ reset states here (external callback) to avoid the React warning
-          setTypedQuote("")
-          setTypedNamePrefix("")
-          setTypedStrong("")
-          setTypedNameSuffix("")
-          setTypingDone(false)
+          setTypedQuote("");
+          setTypedNamePrefix("");
+          setTypedStrong("");
+          setTypedNameSuffix("");
+          setTypingDone(false);
 
-          setMemorialStarted(true)
-          obs.disconnect()
+          setMemorialStarted(true);
+          obs.disconnect();
         }
       },
       { root: null, threshold: 0.15 },
-    )
+    );
 
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   useEffect(() => {
-    if (!memorialStarted) return
+    if (!memorialStarted) return;
 
-    let cancelled = false
+    let cancelled = false;
 
     const clearAllTimeouts = () => {
-      timeoutsRef.current.forEach((id) => window.clearTimeout(id))
-      timeoutsRef.current = []
-    }
+      timeoutsRef.current.forEach((id) => window.clearTimeout(id));
+      timeoutsRef.current = [];
+    };
 
     const typeText = (
       full: string,
@@ -157,39 +172,39 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
       speedMs: number,
     ) =>
       new Promise<void>((resolve) => {
-        let i = 0
+        let i = 0;
 
         const tick = () => {
-          if (cancelled) return
-          i += 1
-          setText(full.slice(0, i))
+          if (cancelled) return;
+          i += 1;
+          setText(full.slice(0, i));
 
           if (i >= full.length) {
-            resolve()
-            return
+            resolve();
+            return;
           }
 
-          const id = window.setTimeout(tick, speedMs)
-          timeoutsRef.current.push(id)
-        }
+          const id = window.setTimeout(tick, speedMs);
+          timeoutsRef.current.push(id);
+        };
 
-        const first = window.setTimeout(tick, speedMs)
-        timeoutsRef.current.push(first)
-      })
+        const first = window.setTimeout(tick, speedMs);
+        timeoutsRef.current.push(first);
+      });
 
-    ;(async () => {
-      await typeText(memorialQuoteFull, setTypedQuote, 32)
-      await typeText(memorialNamePrefixFull, setTypedNamePrefix, 28)
-      await typeText(memorialStrongFull, setTypedStrong, 32)
-      await typeText(memorialNameSuffixFull, setTypedNameSuffix, 28)
-      if (!cancelled) setTypingDone(true)
-    })()
+    (async () => {
+      await typeText(memorialQuoteFull, setTypedQuote, 32);
+      await typeText(memorialNamePrefixFull, setTypedNamePrefix, 28);
+      await typeText(memorialStrongFull, setTypedStrong, 32);
+      await typeText(memorialNameSuffixFull, setTypedNameSuffix, 28);
+      if (!cancelled) setTypingDone(true);
+    })();
 
     return () => {
-      cancelled = true
-      clearAllTimeouts()
-    }
-  }, [memorialStarted])
+      cancelled = true;
+      clearAllTimeouts();
+    };
+  }, [memorialStarted]);
 
   return (
     <section className="faq-page">
@@ -203,10 +218,13 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
 
         <div className="faq-page__list">
           {faqs.map((item, idx) => {
-            const isOpen = openIndex === idx
+            const isOpen = openIndex === idx;
 
             return (
-              <div key={item.q} className={`faq-item ${isOpen ? "is-open" : ""}`}>
+              <div
+                key={item.q}
+                className={`faq-item ${isOpen ? "is-open" : ""}`}
+              >
                 <button
                   type="button"
                   className="faq-item__trigger"
@@ -235,15 +253,29 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
                   </span>
                 </button>
 
-                <div className="faq-item__panel" style={{ maxHeight: isOpen ? 260 : 0 }}>
+                <div
+                  ref={(el) => {
+                    panelRefs.current[idx] = el;
+                  }}
+                  className="faq-item__panel"
+                  style={{
+                    maxHeight: isOpen
+                      ? `${panelRefs.current[idx]?.scrollHeight ?? 0}px`
+                      : 0,
+                  }}
+                >
                   <div className="faq-item__a">{renderAnswer(item.a)}</div>
                 </div>
               </div>
-            )
+            );
           })}
         </div>
 
-        <div ref={bottomSentinelRef} className="faq-page__bottomSentinel" aria-hidden="true" />
+        <div
+          ref={bottomSentinelRef}
+          className="faq-page__bottomSentinel"
+          aria-hidden="true"
+        />
 
         <div
           className={`faq-page__memorial ${memorialStarted ? "is-typing" : ""} ${typingDone ? "is-done" : ""}`}
@@ -254,8 +286,7 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
           </p>
 
           <p className="faq-page__memorialName">
-            {memorialStarted ? typedNamePrefix : memorialNamePrefixFull}
-              {" "}
+            {memorialStarted ? typedNamePrefix : memorialNamePrefixFull}{" "}
             <span className="faq-page__memorialNameStrong">
               {memorialStarted ? typedStrong : memorialStrongFull}
             </span>
@@ -264,5 +295,5 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
         </div>
       </div>
     </section>
-  )
+  );
 }

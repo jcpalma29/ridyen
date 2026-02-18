@@ -1,7 +1,7 @@
 // DetailsPage.tsx
-import { useEffect, useRef } from "react"
+import {useEffect, useRef} from "react"
 import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import {ScrollTrigger} from "gsap/ScrollTrigger"
 import "./DetailsPage.css"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -11,38 +11,56 @@ export default function DetailsPage() {
   const churchRef = useRef<HTMLImageElement | null>(null)
   const cardsRef = useRef<HTMLDivElement | null>(null)
   const timelineRef = useRef<HTMLDivElement | null>(null)
+  const triptychRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const section = sectionRef.current
     const church = churchRef.current
     const cards = cardsRef.current
-    const timeline = timelineRef.current
+    const timeline = timelineRef.current // can be null (timeline is commented out)
+    const triptych = triptychRef.current
 
-    if (!section || !church || !cards || !timeline) return
+    // ✅ only require the elements that actually exist on the page
+    if (!section || !church || !cards || !triptych) return
 
     const ctx = gsap.context(() => {
-      const q = gsap.utils.selector(timeline)
-      const timelineLine = q(".details-page__timelineLine")[0] as
-        | HTMLElement
-        | undefined
-      const timelineItems = gsap.utils.toArray<HTMLElement>(
-        ".timeline-item",
-        timeline,
+      // -----------------------
+      // INITIAL STATES
+      // -----------------------
+      gsap.set(church, {autoAlpha: 0, y: -24})
+      gsap.set(cards, {autoAlpha: 0, y: 18})
+
+      // triptych hidden until scroll
+      const triptychItems = gsap.utils.toArray<HTMLElement>(
+        ".details-triptych__item",
+        triptych,
       )
+      gsap.set(triptychItems, {autoAlpha: 0, y: 18})
 
-      gsap.set(church, { autoAlpha: 0, y: -24 })
-      gsap.set(cards, { autoAlpha: 0, y: 18 })
-      gsap.set(timeline, { autoAlpha: 1 }) // keep container "present"
-      gsap.set(timelineItems, { autoAlpha: 0, y: 14 })
+      // timeline is optional
+      let timelineLine: HTMLElement | undefined
+      let timelineItems: HTMLElement[] = []
 
-      if (timelineLine) {
-        gsap.set(timelineLine, {
-          autoAlpha: 0,
-          scaleX: 0,
-          transformOrigin: "left center",
-        })
+      if (timeline) {
+        const q = gsap.utils.selector(timeline)
+        timelineLine = q(".details-page__timelineLine")[0] as HTMLElement | undefined
+        timelineItems = gsap.utils.toArray<HTMLElement>(".timeline-item", timeline)
+
+        gsap.set(timeline, {autoAlpha: 1})
+        gsap.set(timelineItems, {autoAlpha: 0, y: 14})
+
+        if (timelineLine) {
+          gsap.set(timelineLine, {
+            autoAlpha: 0,
+            scaleX: 0,
+            transformOrigin: "left center",
+          })
+        }
       }
 
+      // -----------------------
+      // MAIN TIMELINE (church -> cards -> timeline optional)
+      // -----------------------
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -52,41 +70,75 @@ export default function DetailsPage() {
         },
       })
 
-      // church first
-      tl.to(
-        church,
-        { autoAlpha: 1, y: 0, duration: 1.2, ease: "power2.out" },
-        0,
-      )
+      tl.to(church, {autoAlpha: 1, y: 0, duration: 1.2, ease: "power2.out"}, 0)
 
-      // cards AFTER church finishes (no overlap)
-      tl.to(
-        cards,
-        { autoAlpha: 1, y: 0, duration: 1.0, ease: "power2.out" },
-        ">",
-      )
+      tl.to(cards, {autoAlpha: 1, y: 0, duration: 1.0, ease: "power2.out"}, ">")
 
-      // line draws in first (so timeline feels connected)
       if (timelineLine) {
         tl.to(
           timelineLine,
-          { autoAlpha: 1, scaleX: 1, duration: 0.7, ease: "power2.out" },
+          {autoAlpha: 1, scaleX: 1, duration: 0.7, ease: "power2.out"},
           ">",
         )
       }
 
-      // timeline items fade in
-      tl.to(
-        timelineItems,
-        {
+      if (timelineItems.length) {
+        tl.to(
+          timelineItems,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.75,
+            ease: "power2.out",
+            stagger: 0.12,
+          },
+          timelineLine ? "<0.08" : ">",
+        )
+      }
+
+      // -----------------------
+      // TRIPTYCH (responsive direction)
+      // -----------------------
+      const mm = gsap.matchMedia()
+
+      mm.add("(min-width: 981px)", () => {
+        gsap.set(triptychItems, {autoAlpha: 0, x: -26, y: 0})
+
+        gsap.to(triptychItems, {
+          scrollTrigger: {
+            trigger: triptych,
+            start: "top 78%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.9,
+          ease: "power2.out",
+          stagger: 0.18,
+        })
+      })
+
+      mm.add("(max-width: 980px)", () => {
+        gsap.set(triptychItems, {autoAlpha: 0, y: 22, x: 0})
+
+        gsap.to(triptychItems, {
+          scrollTrigger: {
+            trigger: triptych,
+            start: "top 82%",
+            toggleActions: "play none none none",
+            once: true,
+          },
           autoAlpha: 1,
           y: 0,
-          duration: 0.75,
+          duration: 0.85,
           ease: "power2.out",
-          stagger: 0.12,
-        },
-        timelineLine ? "<0.08" : ">",
-      )
+          stagger: 0.16,
+        })
+      })
+
+      // ✅ ensures triggers calculate correctly after layout/images
+      requestAnimationFrame(() => ScrollTrigger.refresh())
     }, section)
 
     return () => ctx.revert()
@@ -114,111 +166,105 @@ export default function DetailsPage() {
         </div>
       </div>
 
-      {/* wp image between churchbg and cards (above them) */}
-      <div className="details-page__wp-wrap" aria-hidden="true">
-        {/* <img
-          className="details-page__wp"
-          src={`${base}wp.png`}
-          alt=""
-          draggable={false}
-        /> */}
-      </div>
+      <div className="details-page__wp-wrap" aria-hidden="true" />
 
-      {/* NEW: title above cards */}
       <h2 className="details-page__programTitle">Wedding Program</h2>
 
       <div ref={cardsRef} className="details-page__cards">
         <div className="details-card">
-          <div className="details-card__label">CEREMONY - 2:00PM</div>
-          <div className="details-card__title">
-            <strong>San Antonio De Padua Parish Church</strong>
-          </div>
-          <div className="details-card__text details-card__text--sans">
-            Kaylaway, Nasugbu, Batangas
-          </div>
+          <div className="details-card__inner">
+            <div className="details-card__label">CEREMONY - 2:00PM</div>
+            <div className="details-card__title">
+              <strong>San Antonio De Padua</strong>
+              <br />
+              <strong>Parish Church</strong>
+            </div>
+            <div className="details-card__text details-card__text--sans">
+              Kaylaway, Nasugbu, Batangas
+            </div>
 
-          <a
-            className="details-card__btn"
-            href="https://www.google.com/maps/search/?api=1&query=San%20Antonio%20De%20Padua%20Parish%20Church%2C%20Kaylaway%2C%20Nasugbu%2C%20Batangas"
-            target="_blank"
-            rel="noreferrer"
-          >
-            DIRECTIONS
-          </a>
+            <a
+              className="details-card__btn"
+              href="https://www.google.com/maps/search/?api=1&query=San%20Antonio%20De%20Padua%20Parish%20Church%2C%20Kaylaway%2C%20Nasugbu%2C%20Batangas"
+              target="_blank"
+              rel="noreferrer"
+            >
+              DIRECTIONS
+            </a>
+          </div>
         </div>
 
         <div className="details-card">
-          <div className="details-card__label">RECEPTION - 5:30PM</div>
-          <div className="details-card__title">
-            <strong>Club Ananda</strong>
-          </div>
-          <div className="details-card__text details-card__text--sans">
-            Sandari, Batulao, Batangas
-          </div>
+          <div className="details-card__inner">
+            <div className="details-card__label">RECEPTION - 5:30PM</div>
+            <div className="details-card__title">
+              <strong>Club Ananda</strong>
+            </div>
+            <div className="details-card__text details-card__text--sans">
+              Sandari, Batulao, Batangas
+            </div>
 
-          <a
-            className="details-card__btn"
-            href="https://www.google.com/maps/search/?api=1&query=Club%20Ananda%2C%20Sandari%2C%20Batulao%2C%20Batangas"
-            target="_blank"
-            rel="noreferrer"
-          >
-            DIRECTIONS
-          </a>
+            <a
+              className="details-card__btn"
+              href="https://www.google.com/maps/search/?api=1&query=Club%20Ananda%2C%20Sandari%2C%20Batulao%2C%20Batangas"
+              target="_blank"
+              rel="noreferrer"
+            >
+              DIRECTIONS
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* TIMELINE */}
-      <div className="details-page__timelineWrap">
-        <div
-          ref={timelineRef}
-          className="details-page__timeline"
-          role="list"
-          aria-label="Wedding program timeline"
-        >
-          {/* NEW: animatable faint line */}
-          <div className="details-page__timelineLine" aria-hidden="true" />
+      <div
+        ref={triptychRef}
+        className="details-page__triptych"
+        aria-label="Ceremony, Social, Reception details"
+      >
+        <div className="details-triptych__item">
+          <img
+            className="details-triptych__img"
+            src={`${base}ceremony.png`}
+            alt="Ceremony"
+            draggable={false}
+          />
+          <h3 className="details-triptych__title">Ceremony</h3>
+          <p className="details-triptych__text">
+            The wedding will take place at a charming garden venue just outside
+            central Madrid. Exact location will be shared privately.
+          </p>
+        </div>
 
-          <div className="timeline-item" role="listitem">
-            <div className="timeline-item__time">2:00 PM</div>
-            <div className="timeline-item__dot" aria-hidden="true">
-              <img
-                className="timeline-item__iconImg"
-                src={`${base}wrings.png`}
-                alt=""
-                draggable={false}
-                aria-hidden="true"
-              />
-            </div>
-            <div className="timeline-item__title">Ceremony</div>
-          </div>
+        <div className="details-triptych__item">
+          <img
+            className="details-triptych__img"
+            src={`${base}social.png`}
+            alt="Social"
+            draggable={false}
+          />
+          <h3 className="details-triptych__title">Social Hour</h3>
+          <p className="details-triptych__text">
+            Garden formal. Think soft fabrics, flowy dresses, linen suits —
+            comfortable enough for warm weather, elegant enough for photos!
+          </p>
+        </div>
 
-          <div className="timeline-item" role="listitem">
-            <div className="timeline-item__time">4:30 PM</div>
-            <div className="timeline-item__dot" aria-hidden="true">
-              <span className="timeline-item__icon" aria-hidden="true">
-                🥂︎
-              </span>
-            </div>
-            <div className="timeline-item__title">
-              Social Hour and Cocktails
-            </div>
-          </div>
-
-          <div className="timeline-item" role="listitem">
-            <div className="timeline-item__time">6:00 PM</div>
-            <div className="timeline-item__dot" aria-hidden="true">
-              <img
-                className="timeline-item__iconImg"
-                src={`${base}wc.png`}
-                alt=""
-                draggable={false}
-                aria-hidden="true"
-              />
-            </div>
-            <div className="timeline-item__title">Reception</div>
-          </div>
+        <div className="details-triptych__item">
+          <img
+            className="details-triptych__img"
+            src={`${base}reception.png`}
+            alt="Dress Code"
+            draggable={false}
+          />
+          <h3 className="details-triptych__title">Reception</h3>
+          <p className="details-triptych__text">
+            Following the ceremony, we&apos;ll gather for an intimate dinner
+            with tapas, music, and wine under the Spanish sky.
+          </p>
         </div>
       </div>
+
+      {/* timeline is still optional / commented out */}
     </section>
   )
 }
