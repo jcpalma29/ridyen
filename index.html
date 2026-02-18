@@ -11,166 +11,40 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
-
-    <style>
-      /* Custom right-click menu */
-      #jc-context-menu {
-        position: fixed;
-        z-index: 999999;
-        display: none;
-        min-width: 320px;
-        max-width: min(560px, calc(100vw - 24px));
-        padding: 12px 14px;
-        border-radius: 12px;
-        background: rgba(20, 20, 20, 0.94);
-        color: #fff;
-        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        user-select: text;
-      }
-
-      #jc-context-menu .jc-title {
-        font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        font-size: 12px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        opacity: 0.9;
-        margin-bottom: 10px;
-      }
-
-      #jc-context-menu pre {
-        margin: 0;
-        padding: 10px 10px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.06);
-        overflow: auto;
-        max-height: 46vh;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        font-size: 9px;
-        line-height: 1.15;
-        white-space: pre;
-      }
-
-      #jc-context-menu .jc-foot {
-        margin-top: 10px;
-        font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        font-size: 12px;
-        opacity: 0.9;
-      }
-
-      #jc-context-menu .jc-foot a {
-        color: #fff;
-        text-decoration: underline;
-        text-underline-offset: 2px;
-      }
-    </style>
   </head>
-
   <body>
     <div id="root"></div>
 
-    <!-- Custom menu container (hidden by default) -->
-    <div id="jc-context-menu" aria-hidden="true">
-      <div class="jc-title">RID & YEN 2026</div>
-      <pre id="jc-ascii"></pre>
-      <div class="jc-foot">
-        This site is developed by Cami Palma. Visit <a href="https://jcami.dev" target="_blank" rel="noreferrer">jcami.dev</a> for more info.
-      </div>
-    </div>
-
-    <script type="module" src="/src/main.tsx"></script>
-
     <script>
       ;(() => {
-        const menu = document.getElementById("jc-context-menu")
-        const pre = document.getElementById("jc-ascii")
+        const ascii = String.raw`
+*＊✿❀  hi there  ❀✿＊*
 
-        const ascii = String.raw`                                 .=*#%%%#+:
-                               :*%@@@@@@@@%-
-                             .*@@@@@@@@@@@@%
-                            -%@@@%*=:::*@@@#
-                           +@@@@*:     :@@@-
-                          *@@@%=      :#@%-
-                        .#@@@%:     -#@%+.
-                       :%@@@#.   :*%%*-
-           .-=+++=-.  :%@@@*  :+%%#-.
-        :+#%@@%*++++--%@@%*:=#%#=.     .-=++-:
-       *%@@%*-      =@@@@%#%@*.     :+#%@@@@@@#=
-      #@@@%:      .*@@@@%@@@@:   .=#@@@@@@@@@@@@*
-     =@@@@:      -%@@@%=-@@@@: .+%@@@%#=--=#@@@@@=
-     +@@@@+. .:=#@@@@#: .%@@@==%@@@#=.      +@@@@*
-     :%@@@@%%%@@@@@%+    #@@@%@@@*-         -@@@%-
-      -#@@@@@@@@@%*:   .=%@@@@@*:          -%@@%-
-        -+#####+-.  :+#@#*%@@%=        .:=#@@%+.
-                  -#@%+:-#@@*==+*****##%@@%*-.
-                -#@%=. -%@%=   -%@@@@@@%+:
-              -#@@+.  +@@#:   +%@@@%%@@%%-
-             +@@%:  .#@%=    *@@@%+..-#@@%.
-            +@@%.  -%@#-=.  -@@%@=    .%@@-
-           :@@@#.-*@@+.*@%*.*@@@#      *@#.
-           =@@@%%@@#:  +%@*.%@@@+     .%#.
-           .#@@@@%#+==-. :  %@@@+    :#+
-             :-*%@@@@@@%*:  %@@@+  :++.
-              -%@@@%#%@@@%= #@@@#-==.
-              +@@%:   -#@@%.=@@@%-
-              .#@#     -@@@++@@@@-
-               .*@#.   =@@@+:#@@@*
-                 :=..-+%@@%  -@@@%.
-                 :=++-#@@%-   %@@@+   ..:...
-             .-+*=:  +@@%-    =@@@%*#%%@@@%%#*-
-          :=*+-.    *@@%-    .+%@@@@@@@%%%@@@@@#:
-       :+*+:       +@@%-  :+#@@@@@@%+-.. .:-*@@@%-
-     -*+:         =@@%+-+%@@@%#+%@@%-        -%%@%
-   -#+.          -@@@%%@@@%*=:  *@@@*         *%@#
-  +#:            #@@@@@@#=.     -@@@%        :#@#.
- *%           :+%@@@@%+:        .%@@@:    .-*%#=
-+@+        :+#@@@@@%-            %@@@+--=+**=:
-%@%=...:-*%@@@#+%@@#             %@@@=
-+@@@@%%@@@%*=. :@@@*            .%@@@-
- =#%%%%#*-.    -@@@*            +@@@%.
-    ..         .%@@%.          -%@@@*
-                #@@@#.        =%@@@%.
-                :%@@@%*=:::-+%@@@@%-
-                 -%@@@@@@@@@@@@@@#:
-                  .+%@@@@@@@@@@#=
-                    .-+#%%%%#+-`
+                      *         .        *
+                  .        *          .        ✨
+              .  *  .
+                   *   .      .        *    .
+                        .  *     .  *   .
 
-        pre.textContent = ascii
+ *  JJJJJ     CCCCC   AAAAA   M   M   III   . . .  DDDDD   EEEEE   V     V  *
+      J       C       A   A   MM MM    I    . . .  D    D  E       V     V
+      J       C       AAAAA   M M M    I    . . .  D    D  EEEE     v   v
+  J   J       C       A   A   M   M    I    . . .  D    D  E         v v
+   JJJ        CCCCC   A   A   M   M   III   . . .  DDDDD   EEEEE      v
 
-        const hide = () => {
-          menu.style.display = "none"
-          menu.setAttribute("aria-hidden", "true")
-        }
+        .  ☆  .   *   for lydia   *   .  ☆  .
+        *        ✦        ✧        ✦        *
 
-        const showAt = (x, y) => {
-          menu.style.display = "block"
-          menu.setAttribute("aria-hidden", "false")
+---------------------------------------------------
+This site is developed by Cami Palma.
+Visit jcami.dev for more info.
+---------------------------------------------------
+        `.trim()
 
-          const pad = 8
-          const rect = menu.getBoundingClientRect()
-          const maxX = window.innerWidth - rect.width - pad
-          const maxY = window.innerHeight - rect.height - pad
-
-          const clampedX = Math.max(pad, Math.min(x, maxX))
-          const clampedY = Math.max(pad, Math.min(y, maxY))
-
-          menu.style.left = clampedX + "px"
-          menu.style.top = clampedY + "px"
-        }
-
-        document.addEventListener("contextmenu", (e) => {
-          e.preventDefault()
-          showAt(e.clientX, e.clientY)
-        })
-
-        document.addEventListener("click", hide)
-        document.addEventListener("scroll", hide, { passive: true })
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") hide()
-        })
-        window.addEventListener("blur", hide)
+        console.log(ascii)
       })()
     </script>
+
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
