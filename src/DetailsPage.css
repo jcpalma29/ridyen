@@ -174,7 +174,7 @@
   position: relative;
   z-index: 60;
   max-width: 1160px;
-  margin: 46px auto 0 auto;
+  margin: 46px auto 25px auto;
   /* padding: clamp(28px, 5vw, 54px) clamp(16px, 4vw, 38px); */
   /* background: #2f2f0f; */
   /* border-radius: 18px; */

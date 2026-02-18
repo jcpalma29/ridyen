@@ -41,15 +41,15 @@ export default function DressPage() {
   return (
     <section className="dress-page" ref={sectionRef}>
       <div className="dress-page__inner">
-        <img
+        {/* <img
           ref={wagRef}
           className="dress-page__wag"
           src="/wag.png"
           alt="Wedding Attire Guide"
           loading="eager"
           draggable={false}
-        />
-        {/* <h2 className="dress-page__heading">Wedding Attire Guide</h2> */}
+        /> */}
+        <h2 className="dress-page__heading">Dress Guide</h2>
         <p className="dress-page__subtitle">
           We kindly request that all guests dress in semi-formal attire that
           compliments our color palette. As a courtesy to the bride, please

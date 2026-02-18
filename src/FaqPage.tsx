@@ -209,12 +209,13 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
   return (
     <section className="faq-page">
       <div className="faq-page__inner">
-        <img
+        {/* <img
           className="faq-page__titleImg"
           src="/faq.png"
           alt="Preguntas frecuentes"
           draggable={false}
-        />
+        /> */}
+        <h2 className="faq-page__heading">Guest Information</h2>
 
         <div className="faq-page__list">
           {faqs.map((item, idx) => {

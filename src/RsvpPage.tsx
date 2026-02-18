@@ -97,14 +97,14 @@ export default function RsvpPage() {
   return (
     <section className="rsvp-page">
       <div className="rsvp-page__inner">
-         <img
+         {/* <img
           className="faq-page__titleImg"
           src="/rsvp.png"
           alt="RSVP"
           draggable={false}
-        /> 
+        />  */}
 
-        {/* <h2 className="rsvp-page__heading">RSVP</h2> */}
+        <h2 className="rsvp-page__heading">Celebrate with us..</h2>
 
         <p className="rsvp-page__subtitle">
           Please let us know if you can confirm your attendance by Feb. 28,
@@ -166,7 +166,7 @@ export default function RsvpPage() {
 
             <div className="rsvp-field">
               <label className="rsvp-label" htmlFor="lastName">
-                Please specify if you have any dietary restrictions<span className="rsvp-required"></span>
+                Please specify if you have any dietary restrictions<span className="rsvp-required">*</span>
               </label>
               <input
                 id="lastName"
