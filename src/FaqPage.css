@@ -192,6 +192,7 @@
 /* ✅ Memorial text below the list */
 .faq-page__memorial {
   margin-top: clamp(22px, 5vw, 34px);
+  margin-bottom: 40px;
   text-align: center;
   font-family: var(
     --font-sans,

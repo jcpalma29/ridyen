@@ -54,10 +54,10 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
         q: "What should I do if I have dietary restrictions?",
         a: "When you RSVP, there’s a space to let us know about any allergies or dietary restrictions—please don’t skip it! We’ll make sure our caterer takes care of you.",
       },
-      {
-        q: "Do you have a gift registry?",
-        a: "Having you there is the best gift we could ask for. If you’d like to contribute to our new chapter together, we welcome gifts that could fit into our medium sized luggage bags! Alternatively, we’d appreciate any monetary contributions to help us start our new journey together. It will be greatly appreciated and would be easier to take with us to Dubai.",
-      },
+      // {
+      //   q: "Do you have a gift registry?",
+      //   a: "Having you there is the best gift we could ask for. If you’d like to contribute to our new chapter together, we welcome gifts that could fit into our medium sized luggage bags! Alternatively, we’d appreciate any monetary contributions to help us start our new journey together. It will be greatly appreciated and would be easier to take with us to Dubai.",
+      // },
       {
         q: "Is there accomodation?",
         a: `There are several Airbnb options and hotels nearby. We suggest checking out properties near San Antonio De Padua Church – Kaylaway, Nasugbu, Batangas.	

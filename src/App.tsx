@@ -9,6 +9,7 @@ import DressPage from './DressPage'
 import FaqPage from './FaqPage'
 import RsvpPage from './RsvpPage'
 import Footer from './Footer'
+import RegaloPage from './RegaloPage'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -241,6 +242,7 @@ export default function App() {
           <EntouragePage />
           <DressPage />
           <FaqPage />
+          <RegaloPage />
           <RsvpPage />
           <Footer />
         </main>

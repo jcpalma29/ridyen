@@ -1,0 +1,278 @@
+/* RegaloPage.css */
+
+.regalo-page {
+  min-height: 100svh; /* ✅ iOS-safe viewport height */
+  background: #5a6a47;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(28px, 6vw, 70px) 16px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.regalo-page__inner {
+  width: min(1100px, 100%);
+  display: grid;
+  grid-template-columns: 1.05fr 1.2fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.regalo-page__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.regalo-page__title {
+  margin: 0 0 18px;
+  font-family: "Burgues", var(--font-serif);
+  font-size: 85px;
+  line-height: 0.95;
+  font-weight: 400;
+  color: #f7e7ce;
+  letter-spacing: 0.5px;
+}
+.regalo-page__registry {
+  margin: -30px 0 18px;
+  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-size: 115px;
+  line-height: 0.95;
+  font-weight: 300 !important;
+  color: #f7e7ce;
+  /* letter-spacing: 0.5px; */
+}
+
+.regalo-page__bird {
+  width: min(200px, 100%);
+  height: auto;
+}
+
+.regalo-page__right {
+  color: #f7e7ce;
+  max-width: 560px;
+  margin-left: 25px;
+}
+
+.regalo-page__headline {
+  margin: 0 0 18px;
+  font-family: var(--font-serif, "Cormorant Garamond", serif);
+  font-size: clamp(28px, 3.2vw, 36px);
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+.regalo-page__text {
+  margin: 40px 0 18px;
+  font-family: var(
+    --font-sans,
+    "Montserrat",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif
+  );
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.75;
+  opacity: 0.92;
+}
+
+.regalo-page__link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.regalo-page__link:hover {
+  opacity: 0.9;
+}
+
+/* Collapsible */
+.regalo-page__collapse {
+  margin-top: 40px;
+  background: rgba(247, 231, 206, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.regalo-page__collapseHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.regalo-page__collapseHeader:focus,
+.regalo-page__collapseHeader:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.regalo-page__collapseTitle {
+  font-family: var(--font-serif, "Cormorant Garamond", serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: #2a2a2a;
+}
+
+.regalo-page__chev {
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 18px;
+  line-height: 1;
+  transform: rotate(180deg);
+  transition: transform 160ms ease;
+}
+
+.regalo-page__chev.is-open {
+  transform: rotate(0deg);
+}
+
+/* ✅ iOS-safe collapse */
+.regalo-page__collapseBody {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0 18px;
+  display: none;
+}
+
+.regalo-page__collapseBody.is-open {
+  display: block;
+  padding: 16px 18px 18px;
+}
+
+.regalo-page__collapseText {
+  margin: 0 0 14px;
+  color: rgba(0, 0, 0, 0.62);
+  font-family: var(--font-sans, "Cormorant Garamond", serif);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.6;
+}
+
+.regalo-page__ibanBtn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  padding: 12px 0;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.55);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-family: var(--font-serif, "Cormorant Garamond", serif);
+  font-size: 16px;
+}
+
+.regalo-page__ibanBtn:hover {
+  opacity: 0.85;
+}
+
+.regalo-page__ibanBox {
+  padding: 14px 0 6px;
+  text-align: center;
+}
+
+.regalo-page__ibanLabel {
+  font-family: var(
+    --font-sans,
+    "Montserrat",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif
+  );
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.48);
+  margin-bottom: 6px;
+}
+
+.regalo-page__ibanValue {
+  font-family: var(--font-serif, "Cormorant Garamond", serif);
+  font-size: clamp(16px, 2.2vw, 20px);
+  letter-spacing: 2px;
+  color: rgba(0, 0, 0, 0.62);
+}
+
+@media (max-width: 900px) {
+  .regalo-page {
+    align-items: flex-start; /* ✅ prevents top content from getting clipped */
+    padding-top: 56px; /* ✅ gives room when scrolling/collapsing */
+    padding-bottom: 64px;
+  }
+
+  .regalo-page__inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .regalo-page__right {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .regalo-page__bird {
+    width: min(260px, 85%);
+  }
+
+  .regalo-page__text {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .regalo-page__title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  font-size: 85px;
+
+  }
+
+
+.regalo-page__registry {
+  margin: -30px 0 18px;
+  font-family: var(--font-serif, Georgia, 'Times New Roman', serif);
+  font-size: 55px;
+  line-height: 0.95;
+  font-weight: 300 !important;
+  color: #f7e7ce;
+  /* letter-spacing: 0.5px; */
+}
+
+  .regalo-page__headline {
+    text-align: center;
+    margin-top: -90px;
+  }
+
+  .regalo-page__ibanValue {
+    letter-spacing: 1.2px;
+    word-break: break-word;
+  }
+
+  .regalo-page__bird {
+    width: min(150px, 100%);
+    height: auto;
+    margin-bottom: 45px;
+    margin-top: 0;
+  }
+
+  .regalo-page__collapseText {
+    text-align: justify;
+  }
+}
