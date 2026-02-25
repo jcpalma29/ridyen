@@ -107,8 +107,7 @@ export default function RsvpPage() {
         <h2 className="rsvp-page__heading">Celebrate with us..</h2>
 
         <p className="rsvp-page__subtitle">
-          Please let us know if you can confirm your attendance by Feb. 28,
-          2026.
+          Please confirm your attendance by entering your details below. You can RSVP until March 8, 2026.
         </p>
 
         <iframe
@@ -183,6 +182,7 @@ export default function RsvpPage() {
           <button className="rsvp-submit" type="submit" disabled={!canSubmit}>
             {isSubmitting ? "Submitting…" : "Submit"}
           </button>
+          <h5 className="rsvp-note">***This section will close after the above said date. Please contact the couple directly.***</h5>
 
           {status === "success" && (
             <p className="rsvp-status rsvp-status--success">

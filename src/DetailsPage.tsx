@@ -1,60 +1,65 @@
 // DetailsPage.tsx
-import {useEffect, useRef} from "react"
-import gsap from "gsap"
-import {ScrollTrigger} from "gsap/ScrollTrigger"
-import "./DetailsPage.css"
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./DetailsPage.css";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 export default function DetailsPage() {
-  const sectionRef = useRef<HTMLElement | null>(null)
-  const churchRef = useRef<HTMLImageElement | null>(null)
-  const cardsRef = useRef<HTMLDivElement | null>(null)
-  const timelineRef = useRef<HTMLDivElement | null>(null)
-  const triptychRef = useRef<HTMLDivElement | null>(null)
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const churchRef = useRef<HTMLImageElement | null>(null);
+  const cardsRef = useRef<HTMLDivElement | null>(null);
+  const timelineRef = useRef<HTMLDivElement | null>(null);
+  const triptychRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const section = sectionRef.current
-    const church = churchRef.current
-    const cards = cardsRef.current
-    const timeline = timelineRef.current // can be null (timeline is commented out)
-    const triptych = triptychRef.current
+    const section = sectionRef.current;
+    const church = churchRef.current;
+    const cards = cardsRef.current;
+    const timeline = timelineRef.current; // can be null (timeline is commented out)
+    const triptych = triptychRef.current;
 
     // ✅ only require the elements that actually exist on the page
-    if (!section || !church || !cards || !triptych) return
+    if (!section || !church || !cards || !triptych) return;
 
     const ctx = gsap.context(() => {
       // -----------------------
       // INITIAL STATES
       // -----------------------
-      gsap.set(church, {autoAlpha: 0, y: -24})
-      gsap.set(cards, {autoAlpha: 0, y: 18})
+      gsap.set(church, { autoAlpha: 0, y: -24 });
+      gsap.set(cards, { autoAlpha: 0, y: 18 });
 
       // triptych hidden until scroll
       const triptychItems = gsap.utils.toArray<HTMLElement>(
         ".details-triptych__item",
         triptych,
-      )
-      gsap.set(triptychItems, {autoAlpha: 0, y: 18})
+      );
+      gsap.set(triptychItems, { autoAlpha: 0, y: 18 });
 
       // timeline is optional
-      let timelineLine: HTMLElement | undefined
-      let timelineItems: HTMLElement[] = []
+      let timelineLine: HTMLElement | undefined;
+      let timelineItems: HTMLElement[] = [];
 
       if (timeline) {
-        const q = gsap.utils.selector(timeline)
-        timelineLine = q(".details-page__timelineLine")[0] as HTMLElement | undefined
-        timelineItems = gsap.utils.toArray<HTMLElement>(".timeline-item", timeline)
+        const q = gsap.utils.selector(timeline);
+        timelineLine = q(".details-page__timelineLine")[0] as
+          | HTMLElement
+          | undefined;
+        timelineItems = gsap.utils.toArray<HTMLElement>(
+          ".timeline-item",
+          timeline,
+        );
 
-        gsap.set(timeline, {autoAlpha: 1})
-        gsap.set(timelineItems, {autoAlpha: 0, y: 14})
+        gsap.set(timeline, { autoAlpha: 1 });
+        gsap.set(timelineItems, { autoAlpha: 0, y: 14 });
 
         if (timelineLine) {
           gsap.set(timelineLine, {
             autoAlpha: 0,
             scaleX: 0,
             transformOrigin: "left center",
-          })
+          });
         }
       }
 
@@ -68,18 +73,26 @@ export default function DetailsPage() {
           toggleActions: "play none none none",
           once: true,
         },
-      })
+      });
 
-      tl.to(church, {autoAlpha: 1, y: 0, duration: 1.2, ease: "power2.out"}, 0)
+      tl.to(
+        church,
+        { autoAlpha: 1, y: 0, duration: 1.2, ease: "power2.out" },
+        0,
+      );
 
-      tl.to(cards, {autoAlpha: 1, y: 0, duration: 1.0, ease: "power2.out"}, ">")
+      tl.to(
+        cards,
+        { autoAlpha: 1, y: 0, duration: 1.0, ease: "power2.out" },
+        ">",
+      );
 
       if (timelineLine) {
         tl.to(
           timelineLine,
-          {autoAlpha: 1, scaleX: 1, duration: 0.7, ease: "power2.out"},
+          { autoAlpha: 1, scaleX: 1, duration: 0.7, ease: "power2.out" },
           ">",
-        )
+        );
       }
 
       if (timelineItems.length) {
@@ -93,16 +106,16 @@ export default function DetailsPage() {
             stagger: 0.12,
           },
           timelineLine ? "<0.08" : ">",
-        )
+        );
       }
 
       // -----------------------
       // TRIPTYCH (responsive direction)
       // -----------------------
-      const mm = gsap.matchMedia()
+      const mm = gsap.matchMedia();
 
       mm.add("(min-width: 981px)", () => {
-        gsap.set(triptychItems, {autoAlpha: 0, x: -26, y: 0})
+        gsap.set(triptychItems, { autoAlpha: 0, x: -26, y: 0 });
 
         gsap.to(triptychItems, {
           scrollTrigger: {
@@ -116,11 +129,11 @@ export default function DetailsPage() {
           duration: 0.9,
           ease: "power2.out",
           stagger: 0.18,
-        })
-      })
+        });
+      });
 
       mm.add("(max-width: 980px)", () => {
-        gsap.set(triptychItems, {autoAlpha: 0, y: 22, x: 0})
+        gsap.set(triptychItems, { autoAlpha: 0, y: 22, x: 0 });
 
         gsap.to(triptychItems, {
           scrollTrigger: {
@@ -134,17 +147,17 @@ export default function DetailsPage() {
           duration: 0.85,
           ease: "power2.out",
           stagger: 0.16,
-        })
-      })
+        });
+      });
 
       // ✅ ensures triggers calculate correctly after layout/images
-      requestAnimationFrame(() => ScrollTrigger.refresh())
-    }, section)
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    }, section);
 
-    return () => ctx.revert()
-  }, [])
+    return () => ctx.revert();
+  }, []);
 
-  const base = import.meta.env.BASE_URL
+  const base = import.meta.env.BASE_URL;
 
   return (
     <section ref={sectionRef} className="details-page">
@@ -173,7 +186,7 @@ export default function DetailsPage() {
       <div ref={cardsRef} className="details-page__cards">
         <div className="details-card">
           <div className="details-card__inner">
-            <div className="details-card__label">CEREMONY - 2:00PM</div>
+            <div className="details-card__label">CEREMONY</div>
             <div className="details-card__title">
               <strong>San Antonio De Padua</strong>
               <br />
@@ -196,7 +209,7 @@ export default function DetailsPage() {
 
         <div className="details-card">
           <div className="details-card__inner">
-            <div className="details-card__label">RECEPTION - 5:30PM</div>
+            <div className="details-card__label">RECEPTION </div>
             <div className="details-card__title">
               <strong>Club Ananda</strong>
             </div>
@@ -229,9 +242,10 @@ export default function DetailsPage() {
             draggable={false}
           />
           <h3 className="details-triptych__title">Ceremony</h3>
+          <h5 className="details-triptych__title2"> 2:00 PM</h5>
           <p className="details-triptych__text">
-            The wedding will take place at a charming garden venue just outside
-            central Madrid. Exact location will be shared privately.
+            We invite you to witness our sacred union as we exchange vows in a
+            holy place of profound peace and spiritual beauty.
           </p>
         </div>
 
@@ -243,9 +257,12 @@ export default function DetailsPage() {
             draggable={false}
           />
           <h3 className="details-triptych__title">Social Hour</h3>
+          <h5 className="details-triptych__title2"> 4:30 PM</h5>
+
           <p className="details-triptych__text">
-            Garden formal. Think soft fabrics, flowy dresses, linen suits —
-            comfortable enough for warm weather, elegant enough for photos!
+            Mingle, munch, and enjoy the scenery. We’ve got light refreshments
+            waiting for you — take a stroll and make yourself at home in the
+            great outdoors.
           </p>
         </div>
 
@@ -257,14 +274,16 @@ export default function DetailsPage() {
             draggable={false}
           />
           <h3 className="details-triptych__title">Reception</h3>
+          <h5 className="details-triptych__title2"> 6:00 PM</h5>
+
           <p className="details-triptych__text">
-            Following the ceremony, we&apos;ll gather for an intimate dinner
-            with tapas, music, and wine under the Spanish sky.
+            After we say 'I do,' please join us for a candlelit dinner and music
+            as we celebrate our first evening as a married couple.
           </p>
         </div>
       </div>
 
       {/* timeline is still optional / commented out */}
     </section>
-  )
+  );
 }

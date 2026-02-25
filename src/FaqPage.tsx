@@ -12,13 +12,13 @@ export default function FaqPage() {
     () => [
       {
         q: "Do I have to RSVP?",
-        a: `**Yes, absolutely!** Even if we've already talked and you’ve told us you’re coming, we still need you to RSVP through the official form. If you're not on the confirmed list, our coordinators won't be able to let you into the reception venue — no exceptions!
+        a: `**Yes, absolutely!** Even if we've already talked and you’ve told us you’re coming, we still need you to RSVP through the official form. If you're not on the confirmed list, our coordinators won't be able to let you into the reception venue!
 
-If you haven’t RSVP'd yet, please scroll up on the website and click on the RSVP form to confirm your attendance.`,
+If you haven’t RSVP'd yet, please scroll down on the website and click on the RSVP form to confirm your attendance.`,
       },
       {
         q: "Mobile Free Ceremony",
-        a: "We will be having an unplugged ceremony, so we kindly request that phones and cameras be kept out of sight until after the ceremony is concluded. You are welcome to take photos during the cocktail hour,reception, and after party. ",
+        a: "Help us stay in the moment! We’re keeping the ceremony camera-free, so please silence your phones and keep them away during the ceremony. Once the party starts at cocktail hour, we’d love for you to take as many photos as you’d like.",
       },
       {
         q: "Can I bring Children?",
@@ -44,11 +44,12 @@ If you haven’t RSVP'd yet, please scroll up on the website and click on the RS
       },
       {
         q: "Are both venues accessible?",
-        a: `Yes, both venues are accessible. If you are coming from Manila, we highly recommend planning your trip in advance and considering carpooling or arranging private transportation ahead of time to avoid any stress on the day. For our principal sponsors, please also arrive by 2:00 PM or earlier if possible. Our coordinators will be there to hand you your boutonnieres and bouquets before the ceremony begins.
-         
-        To make things easier, we’ve included location pins for both venues on Google Maps. You can find them on the first few pages of this site—just scroll up! The distance between the church where the church and the reception area is only about 5 mins drive.
-        
-        Kindly note that transportation to and from the wedding venues will be at guests’ own arrangement.`,
+        a: `Yes, both venues are accessible. If you are coming from Manila, we highly recommend planning your trip in advance and considering carpooling or arranging private transportation ahead of time to avoid any stress on the day. 
+
+To make things easier, we’ve included location pins for both venues on Google Maps. The distance between the church and the reception area is only about 5 mins drive.
+
+Kindly note that transportation to and from the wedding venues will be at guests’ own arrangement.
+`,
       },
       {
         q: "What should I do if I have dietary restrictions?",

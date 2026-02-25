@@ -211,6 +211,14 @@
   font-weight: 400;
   color: rgba(20, 20, 18, 0.55);
 }
+.details-triptych__title2 {
+  margin: 0 0 14px 0;
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 3.2vw, 15px);
+  line-height: 1.08;
+  font-weight: 400;
+  color: rgba(20, 20, 18, 0.55);
+}
 
 .details-triptych__text {
   margin: 0;
