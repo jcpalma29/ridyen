@@ -25,8 +25,7 @@ export default function RsvpPage() {
     () => ({
       attend: "entry.877086558",
       firstName: "entry.1498135098",
-      // ✅ Replace this with the real Email field entry ID from your prefilled link
-      email: "entry.REPLACE_ME",
+      email: "entry.138389958",
       lastName: "entry.1980418371",
     }),
     [],
@@ -86,11 +85,6 @@ export default function RsvpPage() {
         [entry.firstName]: firstName.trim(),
         [entry.email]: email.trim(),
         [entry.lastName]: lastName.trim(),
-
-        fvv: "1",
-        draftResponse: "[]",
-        pageHistory: "0",
-        fbzx: "-6593670443021045026",
       });
 
       setStatus("success");
