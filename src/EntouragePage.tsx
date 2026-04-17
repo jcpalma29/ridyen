@@ -229,8 +229,9 @@ export default function EntouragePage() {
             aria-label="Principal sponsors"
           >
             <div className="entourage-section__title">PRINCIPAL SPONSORS</div>
-
+     
             <div className="entourage-cols">
+      
               <ul
                 className="entourage-list"
                 aria-label="Principal sponsors left"
@@ -243,12 +244,13 @@ export default function EntouragePage() {
                 <li>Gen. Noemie Austero</li>
                 <li>Mrs. Felicia Malpal</li>
                 <li>Engr. Wilma Bulaong</li>
-                <li>Ms. Annalyn Trapani</li>
-                <li>Mrs. Abigail Madridano</li>
+            
                 <li>Mrs. Edna Padlan</li>
                 <li>Mrs. Erma Grumez</li>
                 <li>Mrs. Ruth Licuanan</li>
                 <li>Mrs. Marilyn Paitim</li>
+                <li>Mrs. Lirio Solero</li>
+                 <li>Ms. Annalyn Trapani</li>
               </ul>
 
               <ul
@@ -263,14 +265,19 @@ export default function EntouragePage() {
                 <li>Mr. Jupiter Alas</li>
                 <li>Mr. Rizalino Arreza</li>
                 <li>Engr. Edgardo Bulaong</li>
-                <br />
-                <br />
                 <li>Mr. Junior Trigo</li>
                 <li>Mr. Joseph Solejon</li>
                 <li>Mr. Santiago Arreza</li>
                 <li>Mr. Julian Paitim</li>
+                <li>Engr. Reynaldo Solero</li>
+                    <li>Mrs. Abigail Madridano</li>
               </ul>
             </div>
+
+            {/* <ul className="entourage-list entourage-list--centered" aria-label="Principal sponsors centered">
+              <li>Ms. Annalyn Trapani</li>
+              <li>Mrs. Abigail Madridano</li>
+            </ul> */}
           </section>
           <section
             className="entourage-section"
